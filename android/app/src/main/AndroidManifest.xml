@@ -2,7 +2,7 @@
     package="com.example.intro_to_widgets">
 
     <application
-        android:label="intro_to_widgets"
+        android:label="Pokedexer"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
      
