@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/Extensions.dart' as my_extensions;
-import '../models/Pokemon_Info.dart' as poke_info;
+import '../models/all_pokemon.dart' as poke_info;
 
 
 class PokePage extends StatelessWidget {

@@ -13,12 +13,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       title: _title,
       home: Scaffold(
+        appBar:  AppBar(backgroundColor: Colors.red, title: const Text("Pokedex")),
         body: HomeGrid(),
       ),
     );
   }
 }
-

@@ -23,3 +23,14 @@ Future<Map<String, dynamic>> getIndividualData(pokeId) async {
   var response = json.decode(request.body);
   return response;
 }
+
+getNextPage(int pageNo) {
+  String baseUrl = "https://pokeapi.co/api/v2/pokemon/";
+
+  if (pageNo == 1) {
+    print(baseUrl);
+  } else {
+    int offset = pageNo + 20;
+    print("$baseUrl/?offset=$offset&limit=20");
+  }
+}

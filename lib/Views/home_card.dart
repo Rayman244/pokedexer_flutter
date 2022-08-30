@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/Extensions.dart' as my_extensions;
-import "./pokePage.dart";
+import 'poke_page.dart';
 
 List<Widget> homeCard(pokeList, ctx) {
   List<Widget> indivInfo = [];
@@ -20,7 +20,7 @@ List<Widget> homeCard(pokeList, ctx) {
                 // Navigator.push(ctx, PokePage());
                 Navigator.of(ctx).push(MaterialPageRoute(
                     builder: (_) => PokePage(pokeId: pokeId, name: pokeName))),
-            child: Column(
+            child: Row(
               children: [
                 Image(
                   height: 135,
