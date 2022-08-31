@@ -36,7 +36,7 @@ class PokePage extends StatelessWidget {
                 SizedBox(
                   width: 60,
                   height: 60,
-                  child: CircularProgressIndicator(),
+                  child: Center(child: CircularProgressIndicator()),
                 ),
               ];
             }
@@ -54,7 +54,7 @@ class PokePage extends StatelessWidget {
 infoPortion(pokeinfo, context) {
   List<Widget> info = [];
   var pokeId = pokeinfo.data["id"];
-  var pokeName = my_extensions.capitalize(pokeinfo.data!['name']);
+  var pokeName = pokeinfo.data!['name'];
   var pokeImg =
       pokeinfo.data["sprites"]["other"]["official-artwork"]["front_default"];
   var baseExp = pokeinfo.data["base_experience"];

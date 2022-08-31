@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import '../models/Extensions.dart' as my_extensions;
 import 'poke_page.dart';
 
-List<Widget> homeCard(pokeList, ctx) {
+homeCard(pokeList, ctx) {
   List<Widget> indivInfo = [];
-  for (var pokemon in pokeList.data) {
+  for (var pokemon in pokeList) {
     var pokeId = pokemon["id"];
-    var pokeName = my_extensions.capitalize(pokemon["name"]);
-    var pokeImg =
+    var pokeName = pokemon["name"];
+    String pokeImg =
         pokemon["sprites"]["other"]["official-artwork"]["front_default"];
     var pokeTypes = pokemon["types"];
 
@@ -63,7 +63,7 @@ List<Widget> homeCard(pokeList, ctx) {
 List<Widget> getTypes(typeList) {
   List<Widget> pokeTypes = [];
   for (var type in typeList) {
-    var typeName = my_extensions.capitalize(type["type"]['name']);
+    var typeName = type["type"]['name'];
     pokeTypes.add(Padding(
       padding: const EdgeInsets.all(12.0),
       child: Text(typeName),
@@ -71,3 +71,5 @@ List<Widget> getTypes(typeList) {
   }
   return pokeTypes;
 }
+
+

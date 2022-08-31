@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print, prefer_typing_uninitialized_variables
-
 import 'package:flutter/material.dart';
 
 import 'Views/home.dart';
@@ -13,12 +11,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return const MaterialApp(
       title: _title,
-      home: Scaffold(
-        appBar:  AppBar(backgroundColor: Colors.red, title: const Text("Pokedex")),
-        body: HomeGrid(),
-      ),
+      home: HomeGrid(),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: const <BottomNavigationBarItem>[
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.home),
+      //       label: 'Home',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.business),
+      //       label: 'Business',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.school),
+      //       label: 'School',
+      //     ),
+      //   ],
+      // ),
     );
+    // );
   }
 }
