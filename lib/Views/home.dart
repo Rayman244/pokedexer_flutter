@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:intro_to_widgets/Views/poke_list.dart';
-import 'package:intro_to_widgets/Views/search_pokemon.dart';
-import 'package:intro_to_widgets/models/all_pokemon.dart';
-import 'package:intro_to_widgets/models/poke_names_list.dart';
-import '../models/all_pokemon.dart' as poke_info;
-import 'home_card.dart';
+import 'package:intro_to_widgets/views/poke_list.dart';
+import 'package:intro_to_widgets/controllers/search_delegates.dart';
 
+import '../models/all_pokemon.dart' as poke_info;
+// import 'home_card.dart';
+
+/// current home page displays a list of all pokemon with a littloe info about them like there name number and there types
+///
 class HomeGrid extends StatefulWidget {
   const HomeGrid({Key? key}) : super(key: key);
 
@@ -19,12 +20,6 @@ class _HomeGridState extends State<HomeGrid> {
   int page = 1;
   int limit = 0;
 
-  // @override
-  // initState() {
-  //   pokeList ;
-  //   // getByUrl("https://pokeapi.co/api/v2/pokemon/");
-  //   // print("state initialized");
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +32,7 @@ class _HomeGridState extends State<HomeGrid> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: const Text("Pokedex"),
+        title: const Text("Pokedexer"),
         actions: [
           IconButton(
               onPressed: () {
@@ -55,7 +50,7 @@ class _HomeGridState extends State<HomeGrid> {
             child = allPokemon(snapshot, context, refresh);
           } else if (snapshot.hasError) {
             child = const Text("Error Connecting To Database");
-            print("Error populating list");
+            debugPrint("Error populating list");
           } else {
             child = const Center(
               child: SizedBox(
@@ -70,99 +65,29 @@ class _HomeGridState extends State<HomeGrid> {
           );
         },
       ),
-    );
-  }
-}
-
-class MySearchDelegate extends SearchDelegate {
-  var searchResults =pokemonNames;
-
-  var pokemon;
-  @override
-  List<Widget>? buildActions(BuildContext context) {
-    // TODO: implement buildActions
-    // throw UnimplementedError();
-    return [
-      IconButton(
-        icon: const Icon(Icons.clear),
-        onPressed: (() {
-          if (query.isEmpty) {
-            close(context, null);
-          }
-          query = '';
-        }),
-      ),
-    ];
-  }
-
-  @override
-  Widget? buildLeading(BuildContext context) {
-    // TODO: implement buildLeading
-    // throw UnimplementedError();
-    // return IconButton(
-    //   icon: const Icon(Icons.arrow_back),
-    //   onPressed: (() {}),
-    // );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    //  return Text("hello");
-    // TODO: implement buildResults
-    print(query);
-
-    findByName(query);
-
-    return FutureBuilder(
-      future: pokemon,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        Widget child;
-        if (snapshot.hasData) {
-          child = SearchResults(snapshot: snapshot);
-        } else if (snapshot.hasError) {
-          child = const Text("Error Connecting To Database");
-          print("Error populating list");
-        } else {
-          child = const Center(
-            child: SizedBox(
-              width: 60,
-              height: 60,
-              child: CircularProgressIndicator(),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: const <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Drawer Header',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
             ),
-          );
-        }
-        return Container(
-          child: child,
-        );
-      },
-    );
-
-    // return Center(
-    //   child: Text(query),
-    // );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    List<String> suggestions = searchResults.where((searchResult) {
-      final result = searchResult.toLowerCase();
-      final input = query.toLowerCase();
-      return result.contains(input);
-    }).toList();
-
-    return ListView.builder(
-      itemCount: suggestions.length,
-      itemBuilder: (context, index) {
-        final suggestion = suggestions[index];
-        return ListTile(
-          title: Text(suggestion),
-          onTap: () {
-            query = suggestion;
-            pokemon = findByName(query);
-            showResults(context);
-          },
-        );
-      },
+            ListTile(
+              leading: Icon(Icons.shopping_bag),
+              title: Text('Items'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

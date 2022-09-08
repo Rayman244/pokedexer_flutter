@@ -1,32 +1,47 @@
 import 'package:flutter/material.dart';
-import '../models/Extensions.dart' as my_extensions;
+import 'package:intro_to_widgets/controllers/poke_info.dart';
 import '../models/all_pokemon.dart' as poke_info;
 
 
-class PokePage extends StatelessWidget {
-  final int pokeId;
-  final String name;
-  // final String poke_url;
-  // ignore: non_constant_identifier_names
+/// Pokemon personal page. Looks a pokemon up baised on there [pokeId] znd populates the appbar with the [name] of the pokemon
+///  
+class PokePage extends StatefulWidget {
   const PokePage({Key? key, required this.pokeId, required this.name})
       : super(key: key);
+       final int pokeId;
+  final String name;
+
+  @override
+  State<PokePage> createState() => _PokePageState();
+}
+
+class _PokePageState extends State<PokePage> with TickerProviderStateMixin{
+   late TabController _tabController;
+   @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 4, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final Future<Map<String, dynamic>> pokeinfo =
-        poke_info.getIndividualData(pokeId);
+     final Future<Map<String, dynamic>> pokeinfo =
+        poke_info.getIndividualData(widget.pokeId);
+       
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text(name)),
+      
+        ),
+      
       body: FutureBuilder<Map<String, dynamic>>(
           future: pokeinfo,
           builder: (BuildContext context,
               AsyncSnapshot<Map<String, dynamic>> snapshot) {
             List<Widget> children;
             if (snapshot.hasData) {
-              children = infoPortion(snapshot, context);
+              children = infoPortion(snapshot, context,_tabController);
             } else if (snapshot.hasError) {
               children = [];
               // ignore: avoid_print
@@ -51,48 +66,6 @@ class PokePage extends StatelessWidget {
     );
   }
 }
-infoPortion(pokeinfo, context) {
-  List<Widget> info = [];
-  var pokeId = pokeinfo.data["id"];
-  var pokeName = pokeinfo.data!['name'];
-  var pokeImg =
-      pokeinfo.data["sprites"]["other"]["official-artwork"]["front_default"];
-  var baseExp = pokeinfo.data["base_experience"];
-  var pokeHeight = pokeinfo.data["height"];
 
-  info.add(
-    Column(
-      children: [
-        Row(
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Image(
-                height: 200,
-                image: NetworkImage("$pokeImg"),
-              ),
-            ),
-            Column(
-              children: [
-                Row(
-                  children: [
-                    Text("ID: $pokeId"),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Text(pokeName),
-                    ),
 
-                  ],
-                ),
-                Text("Height: $pokeHeight"),
-                Text("Base Experience: $baseExp"),
-              ],
-            ),
-          ],
-        ),
-       
-      ],
-    ),
-  );
-  return info;
-}
+

@@ -1,5 +1,14 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:intro_to_widgets/models/extensions.dart';
+
+
+
+
+
+
+
 
 class SearchResults extends StatelessWidget {
   SearchResults({Key? key, required this.snapshot}) : super(key: key);
@@ -9,7 +18,7 @@ class SearchResults extends StatelessWidget {
     String pokeImg =
         snapshot.data["sprites"]["other"]["official-artwork"]["front_default"];
 
-    int height = snapshot.data["height"];
+    int height =  snapshot.data["height"];
     int weight = snapshot.data["weight"];
 
     List<Widget> stats = [];
@@ -23,31 +32,35 @@ class SearchResults extends StatelessWidget {
     // int def = snapshot.data["stats"][2]["base_stat"];
     // int specAttack = snapshot.data["stats"][3]["base_stat"];
 
-    return Column(
+    return 
+    Column(
       children: [
         Row(
           children: [
             Image(
-              height: 135,
+              height: 200,
               image: NetworkImage(pokeImg),
             ),
-            Text(capitalize(snapshot.data["name"])),
-         
-                Text(height.toString()),
-               Text(weight.toString()),
-
-             
-           
+            const Spacer(),
+            Column(
+              children: stats,
+            ),
+              const Spacer(),
           ],
         ),
         Row(
           children: [
-            const Text("Stats"),
-            Column(
-              children: stats,
+            Center(
+              child: Column(
+                children: [
+                  Text("Height: ${dectoft(height)} ft"),
+                  Text("Weight: ${heToLb(weight)} lb"),
+                ],
+              ),
             )
           ],
-        )
+        ),
+
       ],
     );
   }

@@ -3,6 +3,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intro_to_widgets/models/Extensions.dart';
 
+/// gets all the pokemon from the url provided limited to 20 results per page
+///
+/// the [url] entered will determine the list of pokemon that are returned
+///
 Future<List<Map<String, dynamic>>> getPokemon(url) async {
   List<Map<String, dynamic>> fullList = [];
   var uri = Uri.parse(url);
@@ -12,9 +16,6 @@ Future<List<Map<String, dynamic>>> getPokemon(url) async {
   var prev = {
     "prev": response["previous"] ?? "https://pokeapi.co/api/v2/pokemon/"
   };
-  // if (response["previous"] != Null) {
-  //   print(response["previous"]);
-  // }
   fullList.add(next);
   fullList.add(prev);
 
@@ -29,36 +30,41 @@ Future<List<Map<String, dynamic>>> getPokemon(url) async {
   return fullList;
 }
 
-getByUrl(String url) async {
-  var uri = Uri.parse(url);
-  var req = await http.get(uri);
-  var res = jsonDecode(req.body);
-  print(res);
-}
-
-findByName(String name) async {
-  print(name);
+/// gets pokemons information about a pokemon
+///
+/// uses the [name] of a pokemon desired
+///
+Future<Map<String, dynamic>> findByName(String name) async {
+  // print(name);
   String baseUrl = "https://pokeapi.co/api/v2/pokemon";
   String lowerName = name.toString().toLowerCase();
   String url = "$baseUrl/$lowerName";
-  print(url);
+  // print(url);
   var uri = Uri.parse(url);
   var req = await http.get(uri);
 
   var res = jsonDecode(req.body);
+
   return res;
 }
 
-Future<Map<String, dynamic>> getIndividualData(pokeId) async {
+/// gets info about a pokemon using that pokemons id
+///
+/// the [pokeid] is the id assigned to the pokemon by the API
+///
+Future<Map<String, dynamic>> getIndividualData(int pokeId) async {
   var uri = Uri.parse("https://pokeapi.co/api/v2/pokemon/$pokeId");
   var request = await http.get(uri);
   var response = json.decode(request.body);
   return response;
 }
 
-getAllPokemonsNames() async {
+/// creates a list of all the pokemon names available in the API
+///
+ getAllPokemonsNames() async {
   List<String> allNames = [];
-  String url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1154";
+  int limit = 1154;
+  String url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=$limit";
   var uri = Uri.parse(url);
   var request = await http.get(uri);
   var response = json.decode(request.body);

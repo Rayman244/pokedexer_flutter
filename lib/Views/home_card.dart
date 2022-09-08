@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:intro_to_widgets/controllers/my_widgets.dart';
 import '../models/Extensions.dart' as my_extensions;
+
 import 'poke_page.dart';
 
-homeCard(pokeList, ctx) {
+
+/// loops through each pokemon and creates a list of cards for each with some info about them
+/// 
+/// [pokelist] is the list of the pokemon in groups of 20 with there info.
+/// 
+List<Widget> homeCard(List pokeList, BuildContext ctx) {
   List<Widget> indivInfo = [];
   for (var pokemon in pokeList) {
     var pokeId = pokemon["id"];
-    var pokeName = pokemon["name"];
+    var pokeName = my_extensions.capitalize(pokemon["name"]);
     String pokeImg =
         pokemon["sprites"]["other"]["official-artwork"]["front_default"];
     var pokeTypes = pokemon["types"];
@@ -24,7 +31,7 @@ homeCard(pokeList, ctx) {
               children: [
                 Image(
                   height: 135,
-                  image: NetworkImage("$pokeImg"),
+                  image: NetworkImage(pokeImg),
                 ),
                 SizedBox(
                   child: Column(
@@ -53,23 +60,10 @@ homeCard(pokeList, ctx) {
                   ),
                 ),
               ],
-            )),
+            ),
+            ),
       ),
     ));
   }
   return indivInfo;
 }
-
-List<Widget> getTypes(typeList) {
-  List<Widget> pokeTypes = [];
-  for (var type in typeList) {
-    var typeName = type["type"]['name'];
-    pokeTypes.add(Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Text(typeName),
-    ));
-  }
-  return pokeTypes;
-}
-
-
