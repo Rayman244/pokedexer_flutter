@@ -17,9 +17,6 @@ class HomeGrid extends StatefulWidget {
 class _HomeGridState extends State<HomeGrid> {
   Future<List<Map<String, dynamic>>> pokeList =
       poke_info.getPokemon("https://pokeapi.co/api/v2/pokemon/");
-  int page = 1;
-  int limit = 0;
-
 
   @override
   Widget build(BuildContext context) {

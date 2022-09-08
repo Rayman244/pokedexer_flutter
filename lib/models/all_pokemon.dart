@@ -75,3 +75,4 @@ Future<Map<String, dynamic>> getIndividualData(int pokeId) async {
   }
   return allNames;
 }
+

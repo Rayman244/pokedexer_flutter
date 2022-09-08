@@ -12,7 +12,7 @@ class MySearchDelegate extends SearchDelegate {
 
   late Future<Map<String,dynamic>> pokemon;
   @override
-  List<Widget>? buildActions(BuildContext context) {
+  List<Widget>? buildActions (BuildContext context) {
     return [
       IconButton(
         icon: const Icon(Icons.clear),
