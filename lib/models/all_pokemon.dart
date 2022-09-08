@@ -61,11 +61,11 @@ Future<Map<String, dynamic>> getIndividualData(int pokeId) async {
 
 /// creates a list of all the pokemon names available in the API
 ///
- getAllPokemonsNames() async {
+getAllPokemonsNames() async {
   List<String> allNames = [];
   int limit = 1154;
   String url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=$limit";
-  var uri = Uri.parse(url);
+  Uri uri = Uri.parse(url);
   var request = await http.get(uri);
   var response = json.decode(request.body);
   // print(response["results"]);
@@ -76,3 +76,22 @@ Future<Map<String, dynamic>> getIndividualData(int pokeId) async {
   return allNames;
 }
 
+getSpecies(String url) async {
+  Uri uri = Uri.parse(url);
+  var req = await http.get(uri);
+  var res = json.decode(req.body);
+
+  return res;
+}
+
+getPokedexEnteries(String url) async {
+  // print(url.runtimeType);
+  Uri uri = Uri.parse(url);
+  var req = await http.get(uri);
+  var res = json.decode(req.body);
+  // print();
+
+
+
+  return res['flavor_text_entries'];
+}

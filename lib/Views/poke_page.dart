@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:intro_to_widgets/controllers/poke_info.dart';
+import 'package:intro_to_widgets/models/poke_lists.dart';
 import '../models/all_pokemon.dart' as poke_info;
 
 
 /// Pokemon personal page. Looks a pokemon up baised on there [pokeId] znd populates the appbar with the [name] of the pokemon
 ///  
 class PokePage extends StatefulWidget {
-  const PokePage({Key? key, required this.pokeId, required this.name})
+  const PokePage({Key? key, required this.pokeId, required this.name,required this.mainType})
       : super(key: key);
        final int pokeId;
   final String name;
+  final String mainType;
+
 
   @override
   State<PokePage> createState() => _PokePageState();
@@ -31,35 +34,31 @@ class _PokePageState extends State<PokePage> with TickerProviderStateMixin{
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor:Colors.red,
       
         ),
+        backgroundColor: Color(typeColors[widget.mainType]!.toInt()),
       
       body: FutureBuilder<Map<String, dynamic>>(
           future: pokeinfo,
           builder: (BuildContext context,
               AsyncSnapshot<Map<String, dynamic>> snapshot) {
-            List<Widget> children;
+            Widget children;
             if (snapshot.hasData) {
               children = infoPortion(snapshot, context,_tabController);
             } else if (snapshot.hasError) {
-              children = [];
-              // ignore: avoid_print
-              print("Error populating list");
+              children = const Text("Couldnt get Pokemon info ");
+              debugPrint("Couldnt get pokemon info");
             } else {
-              children = const <Widget>[
-                SizedBox(
+              children = const SizedBox(
                   width: 60,
                   height: 60,
                   child: Center(child: CircularProgressIndicator()),
-                ),
-              ];
+                )
+              ;
             }
-            return GridView.count(
-              // Create a grid with 2 columns. If you change the scrollDirection to
-              // horizontal, this produces 2 rows.
-              crossAxisCount: 1,
-              children: children,
+            return Container(
+              child: children,
             );
           }),
      

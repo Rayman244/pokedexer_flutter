@@ -37,7 +37,8 @@ Widget allPokemon(pokedata, BuildContext ctx, Function refresh) {
         ),
       ),
       Expanded(
-        child: ListView(
+        child: GridView.count(
+          crossAxisCount: 2,
           children: homeCard(pokeData, ctx),
         ),
       )
