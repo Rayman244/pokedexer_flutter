@@ -163,6 +163,8 @@ getFromUrl(String url) async {
   }
 }
 
+/// gets all the evolutions of a pokemon using their species url and
+
 getEvolutions(String url) async {
   List<Map<String, dynamic>> evoList = [];
 
@@ -179,6 +181,11 @@ getEvolutions(String url) async {
       t1Url, evo["chain"]["evolves_to"][0]["evolution_details"][0]);
 
   String evo2Name = evo["chain"]["evolves_to"][0]["species"]["name"];
+  // print(evo["chain"]["evolves_to"]);
+  for (var evolution in evo["chain"]["evolves_to"]) {
+    print(evolution);
+  }
+
   var evo2 = await createEvolutionInfo(evo2Name);
   evoList.add(evo1);
   evoList.add(t1);
@@ -223,15 +230,15 @@ Future<Map<String, dynamic>> createTrigger(String url, evo) async {
   // print(evo);
   evo.forEach((key, value) {
     if (value != null && value != "" && value != false && key != "trigger") {
-      // 
-      if (key == "item" && value["name"]!= null) {
+      //
+      if (key == "item" && value["name"] != null) {
         // print(value);
         // print("${eachCap(remSpecCharacters(key))} : ${eachCap(remSpecCharacters(value["name"])) }");
-        triggerlvl = "${eachCap(remSpecCharacters(key))} : ${eachCap(remSpecCharacters(value["name"]))}";
-      }else{
+        triggerlvl =
+            "${eachCap(remSpecCharacters(key))} : ${eachCap(remSpecCharacters(value["name"]))}";
+      } else {
         triggerlvl = "${eachCap(remSpecCharacters(key))} : $value";
       }
-      
     }
   });
 
