@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:intro_to_widgets/controllers/about/about_portion.dart';
-
-// import 'package:intro_to_widgets/models/poke_lists.dart';
-
+import 'package:pokedexer_flutter/controllers/about/about_portion.dart';
+import 'package:pokedexer_flutter/controllers/evolutions/evolutions_portion.dart';
+import 'package:pokedexer_flutter/controllers/moves/moves_portion.dart';
+import 'package:pokedexer_flutter/controllers/stats/stats_portion.dart';
 import '../models/extensions.dart';
 import '../controllers/my_widgets.dart';
 import '../models/all_pokemon.dart';
-
-import 'about/about_widgets.dart';
 
 ///  list of all the pokemon info [pokeinfo] and gets it ready to be displayed
 Widget infoPortion(
@@ -21,11 +19,15 @@ Widget infoPortion(
   int weight = pokeinfo.data["weight"];
   var types = pokeinfo.data["types"];
   var abilities = pokeinfo.data["abilities"];
+  String speciesUrl = pokeinfo.data["species"]["url"];
 
-  var species = getSpecies(pokeinfo.data["species"]["url"]);
-  var pdEnteries = getPokedexEnteries(pokeinfo.data["species"]["url"]);
+  var species = getFromUrl(speciesUrl);
+  var pdEnteries = getPokedexEnteries(speciesUrl);
+  var locations = getPokemonLocation(pokeinfo.data["location_area_encounters"]);
+  var evolutions = getEvolutions(speciesUrl);
+  List moves = pokeinfo.data["moves"];
 
-  getPokedexEnteries(pokeinfo.data["species"]["url"]);
+  // getPokedexEnteries(pokeinfo.data["species"]["url"]);
   return Column(
     children: [
       Row(
@@ -44,10 +46,9 @@ Widget infoPortion(
           ),
         ],
       ),
-      Row(
-        children: getTypes(types),
-        // PokeInfo.getPokemonData();
-      ),
+      getTypes(types),
+      // PokeInfo.getPokemonData();
+
       Center(
         child: Image(
           height: 200,
@@ -81,11 +82,10 @@ Widget infoPortion(
           controller: tabController,
           children: [
             aboutPortion(pokeHeight, weight, species, abilities, pdEnteries),
-            Column(
-              children: statsPortion(pokeinfo.data["stats"], baseExp),
-            ),
-            const Text("different evolutions"),
-            const Text("All Moves"),
+            statsPortion(pokeinfo.data["stats"], baseExp, locations),
+            evolutionsPortion(evolutions),
+            // const Text("different evolutions"),
+            movesPortion(moves)
           ],
         ),
       )),

@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:intro_to_widgets/Views/search_pokemon.dart';
-import 'package:intro_to_widgets/models/all_pokemon.dart';
-import 'package:intro_to_widgets/models/poke_lists.dart';
+import 'package:pokedexer_flutter/Views/search_pokemon.dart';
+import 'package:pokedexer_flutter/models/all_pokemon.dart';
+import 'package:pokedexer_flutter/models/poke_lists.dart';
 
 /// MySearchDelegate
 ///

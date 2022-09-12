@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intro_to_widgets/views/poke_list.dart';
-import 'package:intro_to_widgets/controllers/search_delegates.dart';
+import 'package:pokedexer_flutter/views/poke_list.dart';
+import 'package:pokedexer_flutter/controllers/search_delegates.dart';
 
 import '../models/all_pokemon.dart' as poke_info;
 // import 'home_card.dart';
@@ -20,9 +20,25 @@ class _HomeGridState extends State<HomeGrid> {
 
   @override
   Widget build(BuildContext context) {
+    Widget child;
+    bool isButtonActive = true;
+   
+
+    toggleButton(buttonState) {
+      if (buttonState == true) {
+        setState(() {
+          isButtonActive = false;
+        });
+      } else {
+        setState(() {
+          isButtonActive = true;
+        });
+      }
+    } 
     refresh(next) {
       setState(() {
         pokeList = poke_info.getPokemon(next);
+        toggleButton(isButtonActive);
       });
     }
 
@@ -42,9 +58,8 @@ class _HomeGridState extends State<HomeGrid> {
         future: pokeList,
         builder: (BuildContext context,
             AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
-          Widget child;
           if (snapshot.hasData) {
-            child = allPokemon(snapshot, context, refresh);
+            child = allPokemon(snapshot, context, refresh, isButtonActive);
           } else if (snapshot.hasError) {
             child = const Text("Error Connecting To Database");
             debugPrint("Error populating list");

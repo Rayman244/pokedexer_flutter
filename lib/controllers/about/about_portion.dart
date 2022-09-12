@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../models/extensions.dart';
 import 'about_widgets.dart';
-
-aboutPortion(height, weight, species, abilities, pdEnteries) {
+/// displays the information in the about section in the slide bar using the [height] in ft and [weight] in lbs. 
+/// Gets the different types of [species] a pokemon can be and displays them in the correct position.
+/// lastly retreves all of the [pdEnteries] (pokedex enteries) and displays all of them as well with the versions in a column to the left and the description the matches to the right    
+Widget aboutPortion(height, weight, species, abilities, pdEnteries) {
   return SingleChildScrollView(
     child: Column(
       children: [
@@ -63,7 +65,7 @@ aboutPortion(height, weight, species, abilities, pdEnteries) {
                     ),
                     Row(
                       children: [
-                        Text("${heToLb(weight)} lb"),
+                        Text("${heToLb(weight)} lbs"),
                       ],
                     ),
                     FutureBuilder(
@@ -82,7 +84,7 @@ aboutPortion(height, weight, species, abilities, pdEnteries) {
                       },
                     ),
                     Row(
-                      children: abilitiesPortion(abilities),
+                      children:[abilitiesPortion(abilities)],
                     ),
                   ],
                 ),

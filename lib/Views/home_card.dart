@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intro_to_widgets/controllers/my_widgets.dart';
-import 'package:intro_to_widgets/models/poke_lists.dart';
-import '../models/Extensions.dart' as my_extensions;
+import 'package:pokedexer_flutter/controllers/my_widgets.dart';
+import 'package:pokedexer_flutter/models/poke_lists.dart';
+import '../models/extensions.dart' as my_extensions;
 
 import 'poke_page.dart';
 
@@ -22,7 +22,8 @@ List<Widget> homeCard(List pokeList, BuildContext ctx) {
     try {
       pokeSecType = pokeTypes?[1]["type"]['name'];
     } catch (e) {
-      debugPrint(e.toString());
+      // debugPrint(e.toString());
+
     }
 
     // var secCol = pokeSecType ?? pokeMainType;
@@ -36,8 +37,8 @@ List<Widget> homeCard(List pokeList, BuildContext ctx) {
         child: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                  begin: Alignment.topRight,
+                  end: Alignment.topLeft,
                   colors: [primaryColor, secondryColor])),
           child: InkWell(
             splashColor: Colors.red,
@@ -49,6 +50,7 @@ List<Widget> homeCard(List pokeList, BuildContext ctx) {
                           pokeId: pokeId,
                           name: pokeName,
                           mainType: pokeMainType,
+                          secType: pokeSecType,
                         ))),
             child: Column(
               children: [
@@ -59,25 +61,24 @@ List<Widget> homeCard(List pokeList, BuildContext ctx) {
                 SizedBox(
                   child: Column(
                     children: [
-                      Row(
+                      Column(
                         children: [
                           // Padding(
                           //   padding: const EdgeInsets.fromLTRB(12.0, 5, 0, 0),
                           //   child: Text("id: $pokeId"),
                           // ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(12.0, 5, 0, 0),
-                            child: Text(
+                           Text(
                               pokeName,
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold),
-                            ),
+                          
                           ),
                         ],
                       ),
-                      Row(
-                        children: getTypes(pokeTypes),
-                        // PokeInfo.getPokemonData();
+                      Center(
+                        child: getTypes(pokeTypes),
+                          // PokeInfo.getPokemonData();
+                        
                       ),
                     ],
                   ),

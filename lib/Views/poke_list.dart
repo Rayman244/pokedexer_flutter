@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:intro_to_widgets/Views/home_card.dart';
+import 'package:pokedexer_flutter/Views/home_card.dart';
 
 /// displays a list of all the pokemon in a list
 
-Widget allPokemon(pokedata, BuildContext ctx, Function refresh) {
-  List pokeData = pokedata.data;
-  var next = pokeData.removeAt(0);
-  var prev = pokeData.removeAt(0);
+Widget allPokemon(AsyncSnapshot<List<Map<String, dynamic>>> pokedata, BuildContext ctx, Function refresh,bool buttonActive) {
+ 
+  List<Map<String, dynamic>>? pokeData = pokedata.data;
+  
 
+  var next = pokeData?.removeAt(0);
+  var prev = pokeData?.removeAt(0);
   return Column(
     children: [
       ColoredBox(
@@ -17,9 +19,14 @@ Widget allPokemon(pokedata, BuildContext ctx, Function refresh) {
             Padding(
               padding: const EdgeInsets.all(5),
               child: ElevatedButton(
-                onPressed: () {
-                  refresh(prev["prev"]);
-                },
+                onPressed: buttonActive ? () {
+                        refresh(prev!["prev"]);
+                        // loading snackbar
+                        ScaffoldMessenger.of(ctx).showSnackBar(
+                          const SnackBar(content: Text('Loading Please Wait')),
+                        );
+                      }:null
+                    ,
                 child: const Text("Prev"),
               ),
             ),
@@ -28,7 +35,12 @@ Widget allPokemon(pokedata, BuildContext ctx, Function refresh) {
               padding: const EdgeInsets.all(5),
               child: ElevatedButton(
                 onPressed: () {
-                  refresh(next["next"]);
+                  refresh(next!["next"]);
+                  // loading snackbar
+
+                  ScaffoldMessenger.of(ctx).showSnackBar(
+                    const SnackBar(content: Text('Loading Please Wait')),
+                  );
                 },
                 child: const Text("Next"),
               ),
@@ -39,7 +51,7 @@ Widget allPokemon(pokedata, BuildContext ctx, Function refresh) {
       Expanded(
         child: GridView.count(
           crossAxisCount: 2,
-          children: homeCard(pokeData, ctx),
+          children: homeCard(pokeData!, ctx),
         ),
       )
     ],
