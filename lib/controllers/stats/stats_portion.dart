@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pokeapi/model/pokemon/pokemon.dart';
 
 import 'stats_widgets.dart';
 
 /// this is the layout to all the [stats] like [baseExp] and hp, [locations] to get each pokemon.
-statsPortion(List stats, int baseExp, locations) {
+statsPortion(List<Stats>? stats, int baseExp, locations) {
   return SingleChildScrollView(
     child: Column(
       children: [

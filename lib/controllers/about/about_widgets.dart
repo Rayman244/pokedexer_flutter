@@ -1,6 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:pokedexer_flutter/models/extensions.dart';
-
 
 /// gets the pokedex [enteries] loops through to only get the ones in english. filrers them to remove any unwanted characters, then creates a text widget for each entry.
 List<Widget> pdEnteriesPortion(AsyncSnapshot enteries) {
@@ -16,7 +17,7 @@ List<Widget> pdEnteriesPortion(AsyncSnapshot enteries) {
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.only(right:3.0),
+            padding: const EdgeInsets.only(right: 3.0),
             child: SizedBox(
               width: 110,
               child: Column(
@@ -28,10 +29,8 @@ List<Widget> pdEnteriesPortion(AsyncSnapshot enteries) {
         ],
       ),
     ));
-   
   });
 
-  
   return pdEnteries;
 }
 
@@ -43,7 +42,7 @@ Widget abilitiesPortion(List abil) {
     abilities.add(
       Row(
         children: [
-          Text(capitalize(ability["ability"]["name"])),
+          Text(capitalize(ability.ability.name)),
         ],
       ),
     );

@@ -11,7 +11,7 @@ import 'package:pokedexer_flutter/models/poke_lists.dart';
 Widget getTypes(List typeList) {
   List<Widget> pokeTypes = [const Spacer()];
   for (var type in typeList) {
-    var typeName = my_extensions.capitalize(type["type"]['name']);
+    var typeName = my_extensions.capitalize(type.type.name);
     pokeTypes.add(Padding(
       padding: const EdgeInsets.all(5.0),
       child: typeChecker(typeName),

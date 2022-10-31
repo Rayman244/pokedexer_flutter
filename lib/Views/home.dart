@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pokeapi/model/pokemon/pokemon.dart';
+import 'package:pokeapi/pokeapi.dart';
 import 'package:pokedexer_flutter/views/poke_list.dart';
 import 'package:pokedexer_flutter/controllers/search_delegates.dart';
 
@@ -15,14 +17,18 @@ class HomeGrid extends StatefulWidget {
 }
 
 class _HomeGridState extends State<HomeGrid> {
-  Future<List<Map<String, dynamic>>> pokeList =
-      poke_info.getPokemon("https://pokeapi.co/api/v2/pokemon/");
+  // Future<List<Map<String, dynamic>>> pokeList =
+  //     poke_info.getPokemon("https://pokeapi.co/api/v2/pokemon/");
+  Future<List<Pokemon?>> response = PokeAPI.getObjectList<Pokemon>(1, 20);
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    Widget child;
+    late Widget child;
     bool isButtonActive = true;
-   
 
     toggleButton(buttonState) {
       if (buttonState == true) {
@@ -34,10 +40,11 @@ class _HomeGridState extends State<HomeGrid> {
           isButtonActive = true;
         });
       }
-    } 
+    }
+
     refresh(next) {
       setState(() {
-        pokeList = poke_info.getPokemon(next);
+        // pokeList = poke_info.getPokemon(next);
         toggleButton(isButtonActive);
       });
     }
@@ -54,12 +61,11 @@ class _HomeGridState extends State<HomeGrid> {
               icon: const Icon(Icons.search)),
         ],
       ),
-      body: FutureBuilder<List<Map<String, dynamic>>>(
-        future: pokeList,
-        builder: (BuildContext context,
-            AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+      body: FutureBuilder(
+        future: response,
+        builder: (BuildContext  context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            child = allPokemon(snapshot, context, refresh, isButtonActive);
+            child = allPokemon(snapshot.data, context, refresh, isButtonActive);
           } else if (snapshot.hasError) {
             child = const Text("Error Connecting To Database");
             debugPrint("Error populating list");

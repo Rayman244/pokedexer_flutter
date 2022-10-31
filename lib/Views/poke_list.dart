@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:pokeapi/model/pokemon/pokemon.dart';
 import 'package:pokedexer_flutter/Views/home_card.dart';
 
 /// displays a list of all the pokemon in a list
 
-Widget allPokemon(AsyncSnapshot<List<Map<String, dynamic>>> pokedata, BuildContext ctx, Function refresh,bool buttonActive) {
+Widget allPokemon(List<Pokemon?> pokeData, BuildContext ctx, Function refresh,bool buttonActive) {
  
-  List<Map<String, dynamic>>? pokeData = pokedata.data;
+  // List<Map<String, dynamic>>? pokeData = pokedata.data;
   
 
-  var next = pokeData?.removeAt(0);
-  var prev = pokeData?.removeAt(0);
+  // var next = pokeData?.removeAt(0);
+  // var prev = pokeData?.removeAt(0);
   return Column(
     children: [
       ColoredBox(
@@ -20,7 +21,7 @@ Widget allPokemon(AsyncSnapshot<List<Map<String, dynamic>>> pokedata, BuildConte
               padding: const EdgeInsets.all(5),
               child: ElevatedButton(
                 onPressed: buttonActive ? () {
-                        refresh(prev!["prev"]);
+                        // refresh(prev!["prev"]);
                         // loading snackbar
                         ScaffoldMessenger.of(ctx).showSnackBar(
                           const SnackBar(content: Text('Loading Please Wait')),
@@ -35,7 +36,7 @@ Widget allPokemon(AsyncSnapshot<List<Map<String, dynamic>>> pokedata, BuildConte
               padding: const EdgeInsets.all(5),
               child: ElevatedButton(
                 onPressed: () {
-                  refresh(next!["next"]);
+                  // refresh(next!["next"]);
                   // loading snackbar
 
                   ScaffoldMessenger.of(ctx).showSnackBar(
@@ -51,7 +52,7 @@ Widget allPokemon(AsyncSnapshot<List<Map<String, dynamic>>> pokedata, BuildConte
       Expanded(
         child: GridView.count(
           crossAxisCount: 2,
-          children: homeCard(pokeData!, ctx),
+          children: homeCard(pokeData, ctx),
         ),
       )
     ],

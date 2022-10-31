@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:pokeapi/model/pokemon/pokemon.dart';
 import 'package:pokedexer_flutter/controllers/about/about_portion.dart';
 import 'package:pokedexer_flutter/controllers/evolutions/evolutions_portion.dart';
 import 'package:pokedexer_flutter/controllers/moves/moves_portion.dart';
@@ -9,23 +12,25 @@ import '../models/all_pokemon.dart';
 
 ///  list of all the pokemon info [pokeinfo] and gets it ready to be displayed
 Widget infoPortion(
-    pokeinfo, BuildContext context, TabController tabController) {
-  int pokeId = pokeinfo.data["id"];
-  String pokeName = capitalize(pokeinfo.data!['name']);
-  String pokeImg =
-      pokeinfo.data["sprites"]["other"]["official-artwork"]["front_default"];
-  int baseExp = pokeinfo.data["base_experience"];
-  int pokeHeight = pokeinfo.data["height"];
-  int weight = pokeinfo.data["weight"];
-  var types = pokeinfo.data["types"];
-  var abilities = pokeinfo.data["abilities"];
-  String speciesUrl = pokeinfo.data["species"]["url"];
+    Pokemon pokeinfo, BuildContext context, TabController tabController) {
+log(pokeinfo.stats!.toString());
+  int pokeId = pokeinfo.id!;
+  String pokeName = capitalize(pokeinfo.name!);
+  String pokeImg = pokeinfo.sprites!.oAFrontDefault!;
+  int baseExp = pokeinfo.baseExperience!;
+  int pokeHeight = pokeinfo.height!;
+  int weight = pokeinfo.weight!;
+  // var types = pokeinfo.data["types"];
+
+  var abilities = pokeinfo.abilities;
+
+  String speciesUrl = pokeinfo.species!.url!;
 
   var species = getFromUrl(speciesUrl);
   var pdEnteries = getPokedexEnteries(speciesUrl);
-  var locations = getPokemonLocation(pokeinfo.data["location_area_encounters"]);
-  var evolutions = getEvolutions(speciesUrl);
-  List moves = pokeinfo.data["moves"];
+  var locations = getPokemonLocation(pokeinfo.locationAreaEncounters!);
+  // var evolutions = getEvolutions(speciesUrl);
+  // List moves = pokeinfo.data["moves"];
 
   // getPokedexEnteries(pokeinfo.data["species"]["url"]);
   return Column(
@@ -46,7 +51,7 @@ Widget infoPortion(
           ),
         ],
       ),
-      getTypes(types),
+      getTypes(pokeinfo.types!),
       // PokeInfo.getPokemonData();
 
       Center(
@@ -81,11 +86,16 @@ Widget infoPortion(
         child: TabBarView(
           controller: tabController,
           children: [
+            // Container(),
             aboutPortion(pokeHeight, weight, species, abilities, pdEnteries),
-            statsPortion(pokeinfo.data["stats"], baseExp, locations),
-            evolutionsPortion(evolutions),
+            statsPortion(pokeinfo.stats, baseExp, locations),
+            // Container(),
+            Container(),
+            Container(),
+
+            // evolutionsPortion(evolutions),
             // const Text("different evolutions"),
-            movesPortion(moves)
+            // movesPortion(moves)
           ],
         ),
       )),

@@ -2,34 +2,45 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:pokeapi/model/pokemon/pokemon.dart';
+import 'package:pokeapi/pokeapi.dart';
 import 'package:pokedexer_flutter/models/extensions.dart';
 
 /// gets all the pokemon from the url provided limited to 20 results per page
 ///
 /// the [url] entered will determine the list of pokemon that are returned
 ///
-Future<List<Map<String, dynamic>>> getPokemon(url) async {
-  List<Map<String, dynamic>> fullList = [];
-  var uri = Uri.parse(url);
-  var request = await http.get(uri);
-  var response = json.decode(request.body);
-  var next = {"next": response["next"]};
-  var prev = {
-    "prev": response["previous"] ?? "https://pokeapi.co/api/v2/pokemon/"
-  };
-  fullList.add(next);
-  fullList.add(prev);
+// Future<List<Map<String, dynamic>>> getPokemon(url) async {
+//   List<Map<String, dynamic>> fullList = [];
+//   var uri = Uri.parse(url);
+//   var response2 = PokeAPI.getObjectList<Pokemon>(1, 20);
+//   print("response2");
+//   print(response2);
+//   print("<-------------------------------------->");
+//   var request = await http.get(uri);
+//   var response = json.decode(request.body);
+//   print("response1");
 
-  for (var pokemon in response['results']) {
-    // getPokeByUrl(pokemon['url']);
-    var uri2 = Uri.parse(pokemon['url']);
-    var req2 = await http.get(uri2);
-    var response2 = json.decode(req2.body);
-    fullList.add(response2);
-  }
+//   print(response);
+//   var next = {"next": response["next"]};
+//   var prev = {
+//     "prev": response["previous"] ?? "https://pokeapi.co/api/v2/pokemon/"
+//   };
+//   fullList.add(next);
+//   fullList.add(prev);
 
-  return fullList;
-}
+//   for (var pokemon in response['results']) {
+//     // getPokeByUrl(pokemon['url']);
+//     var uri2 = Uri.parse(pokemon['url']);
+//     var req2 = await http.get(uri2);
+//     var response2 = json.decode(req2.body);
+//     fullList.add(response2);
+//   }
+
+//   return fullList;
+// }
+
+
 
 /// gets pokemons information about a pokemon
 ///
