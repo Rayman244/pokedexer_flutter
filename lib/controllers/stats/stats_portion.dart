@@ -123,7 +123,7 @@ statsPortion(List<Stats>? stats, int baseExp, locations) {
                 builder: (BuildContext context, snapshot) {
                   List<Widget> children = [];
                   if (snapshot.hasData) {
-                    children = locationsPortion(snapshot);
+                    children = locationsPortion(snapshot.data);
                   } else if (snapshot.hasError) {
                     children = const [Text("Error getting info")];
                     debugPrint("Error getting data");

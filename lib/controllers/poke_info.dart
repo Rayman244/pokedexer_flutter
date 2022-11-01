@@ -13,7 +13,7 @@ import '../models/all_pokemon.dart';
 ///  list of all the pokemon info [pokeinfo] and gets it ready to be displayed
 Widget infoPortion(
     Pokemon pokeinfo, BuildContext context, TabController tabController) {
-log(pokeinfo.stats!.toString());
+// log(pokeinfo.stats!.toString());
   int pokeId = pokeinfo.id!;
   String pokeName = capitalize(pokeinfo.name!);
   String pokeImg = pokeinfo.sprites!.oAFrontDefault!;
@@ -28,7 +28,8 @@ log(pokeinfo.stats!.toString());
 
   var species = getFromUrl(speciesUrl);
   var pdEnteries = getPokedexEnteries(speciesUrl);
-  var locations = getPokemonLocation(pokeinfo.locationAreaEncounters!);
+  // var locations = getPokemonLocation(pokeinfo.locationAreaEncounters!);
+  var locations = getFromUrl(pokeinfo.locationAreaEncounters!);
   // var evolutions = getEvolutions(speciesUrl);
   // List moves = pokeinfo.data["moves"];
 

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -39,8 +40,6 @@ import 'package:pokedexer_flutter/models/extensions.dart';
 
 //   return fullList;
 // }
-
-
 
 /// gets pokemons information about a pokemon
 ///
@@ -121,39 +120,64 @@ Future<List> getPokedexEnteries(String url) async {
 /// gets all the locations that the pokemon is available to be caught using there [url]
 getPokemonLocation(url) async {
   var locationMap = [];
+  var editedLocationMap = [];
   try {
     var res = await getFromUrl(url);
-    for (var location in res) {
-      String ver;
-      for (var version in location["version_details"]) {
-        ver = version["version"]["name"];
-        for (var detail in version["encounter_details"]) {
-          var methodDetails = await getFromUrl(detail["method"]['url']);
-          String conStr = "None";
-          for (var condition in detail["condition_values"]) {
-            var conditionDetails = await getFromUrl(condition["url"]);
+    for (var entry in res) {
+      locationMap.add(ListTile(
+        title: Text(entry["location_area"]["name"]),
+      ));
+      // log(entry.toString());
+      // print(location[""]);
+      // print(entry["location_area"]["name"]);
+      // print(location["version_details"]);
+      // print(location[""]);
+      // var testArr = [];
+      // entry["version_details"].asMap().forEach((i, encDetails) {
+      //   // print('$encDetails');
+      //   print("");
+      //   print(encDetails["encounter_details"]);
+      // });
 
-            for (var conName in conditionDetails["names"]) {
-              if (conName["language"]["name"] == "en") {
-                conStr = conName["name"];
-              }
-            }
-          }
+      // for (var i = 0; i < .length; i++) {
+      //   if()
+      // }
+      // for (var encDetails in entry["version_details"]) {
+      //   print(encDetails);
+      // }
+      // print("End");
+      // print(location["version_details"]);
+      // String ver;
 
-          for (var recName in methodDetails["names"]) {
-            if (recName["language"]["name"] == "en") {
-              locationMap.add({
-                "version": ver,
-                "max_level": detail["max_level"],
-                "min_level": detail["min_level"],
-                "method": recName["name"],
-                "chance": detail["chance"],
-                "condition": conStr,
-              });
-            }
-          }
-        }
-      }
+      // for (var version in entry["version_details"]) {
+      //   ver = version["version"]["name"];
+      //   for (var detail in version["encounter_details"]) {
+      //     var methodDetails = await getFromUrl(detail["method"]['url']);
+      //     String conStr = "None";
+      //     for (var condition in detail["condition_values"]) {
+      //       var conditionDetails = await getFromUrl(condition["url"]);
+
+      //       for (var conName in conditionDetails["names"]) {
+      //         if (conName["language"]["name"] == "en") {
+      //           conStr = conName["name"];
+      //         }
+      //       }
+      //     }
+
+      //     for (var recName in methodDetails["names"]) {
+      //       if (recName["language"]["name"] == "en") {
+      //         locationMap.add({
+      //           "version": ver,
+      //           "max_level": detail["max_level"],
+      //           "min_level": detail["min_level"],
+      //           "method": recName["name"],
+      //           "chance": detail["chance"],
+      //           "condition": conStr,
+      //         });
+      //       }
+      //     }
+      //   }
+      // }
     }
 
     return locationMap.toSet().toList();
