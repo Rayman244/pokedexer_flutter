@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pokeapi/model/pokemon/pokemon.dart';
 import 'package:pokeapi/pokeapi.dart';
+import 'package:pokedexer_flutter/models/encounter_info.dart';
 import 'package:pokedexer_flutter/models/extensions.dart';
 
 /// gets all the pokemon from the url provided limited to 20 results per page
@@ -120,66 +121,47 @@ Future<List> getPokedexEnteries(String url) async {
 /// gets all the locations that the pokemon is available to be caught using there [url]
 getPokemonLocation(url) async {
   var locationMap = [];
-  var editedLocationMap = [];
+
   try {
     var res = await getFromUrl(url);
-    for (var entry in res) {
-      locationMap.add(ListTile(
-        title: Text(entry["location_area"]["name"]),
-      ));
-      // log(entry.toString());
-      // print(location[""]);
-      // print(entry["location_area"]["name"]);
-      // print(location["version_details"]);
-      // print(location[""]);
-      // var testArr = [];
-      // entry["version_details"].asMap().forEach((i, encDetails) {
-      //   // print('$encDetails');
-      //   print("");
-      //   print(encDetails["encounter_details"]);
-      // });
 
-      // for (var i = 0; i < .length; i++) {
-      //   if()
-      // }
-      // for (var encDetails in entry["version_details"]) {
-      //   print(encDetails);
-      // }
-      // print("End");
-      // print(location["version_details"]);
-      // String ver;
+    for (var location in res) {
+      Map<String, dynamic> myMap = {};
+      myMap["location_name"] = location["location_area"]["name"];
+      myMap["versions"] = [];
 
-      // for (var version in entry["version_details"]) {
-      //   ver = version["version"]["name"];
-      //   for (var detail in version["encounter_details"]) {
-      //     var methodDetails = await getFromUrl(detail["method"]['url']);
-      //     String conStr = "None";
-      //     for (var condition in detail["condition_values"]) {
-      //       var conditionDetails = await getFromUrl(condition["url"]);
+      for (var version in location["version_details"]) {
+        // print(version);
+        version["version"].forEach((ind, ver) {
+          if (ind == "name") {
+            myMap["versions"].add(ver);
+          }
+        });
+        myMap["chance"] = version["max_chance"];
+        myMap["encounters"] = {};
 
-      //       for (var conName in conditionDetails["names"]) {
-      //         if (conName["language"]["name"] == "en") {
-      //           conStr = conName["name"];
-      //         }
-      //       }
-      //     }
+        for (var detail in version["encounter_details"]) {
+          myMap["encounters"]["chance"] = detail["chance"];
+          myMap["encounters"]["min_level"] = detail["min_level"];
+          myMap["encounters"]["max_level"] = detail["max_level"];
+          myMap["encounters"]["method"] =
+              encounterMethods[detail["method"]["url"]];
+          List conditions = [];
+          for (var condition in detail["condition_values"]) {
+            // print(condition);
+            conditions.add(conditionMap[condition["url"]]);
+            
+          }
+    
+          myMap["encounters"]["conditions"] = conditions;
 
-      //     for (var recName in methodDetails["names"]) {
-      //       if (recName["language"]["name"] == "en") {
-      //         locationMap.add({
-      //           "version": ver,
-      //           "max_level": detail["max_level"],
-      //           "min_level": detail["min_level"],
-      //           "method": recName["name"],
-      //           "chance": detail["chance"],
-      //           "condition": conStr,
-      //         });
-      //       }
-      //     }
-      //   }
-      // }
+        }
+
+      }
+      locationMap.add(myMap);
     }
-
+    
+    // log(locationMap.toString());
     return locationMap.toSet().toList();
   } catch (e) {
     debugPrint(e.toString());

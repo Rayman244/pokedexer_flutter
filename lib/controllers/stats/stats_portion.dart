@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:pokeapi/model/encounter/encounter-condition-value.dart';
 import 'package:pokeapi/model/pokemon/pokemon.dart';
+import 'package:pokeapi/pokeapi.dart';
 
 import 'stats_widgets.dart';
 
@@ -100,30 +104,30 @@ statsPortion(List<Stats>? stats, int baseExp, locations) {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0, bottom: 5),
-                child: Row(
-                  children: const [
-                    SizedBox(
-                      width: 70,
-                      child: Text('Version:'),
-                    ),
-                    SizedBox(
-                      width: 35,
-                      child: Text("Level"),
-                    ),
-                    SizedBox(width: 40, child: Text("Odds")),
-                    SizedBox(child: Text("Condition")),
-                    Expanded(child: Center(child: Text("Method"))),
-                  ],
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 10.0, bottom: 5),
+              //   child: Row(
+              //     children: const [
+              //       SizedBox(
+              //         width: 70,
+              //         child: Text('Version:'),
+              //       ),
+              //       SizedBox(
+              //         width: 35,
+              //         child: Text("Level"),
+              //       ),
+              //       SizedBox(width: 40, child: Text("Odds")),
+              //       SizedBox(child: Text("Condition")),
+              //       Expanded(child: Center(child: Text("Method"))),
+              //     ],
+              //   ),
+              // ),
               FutureBuilder(
                 future: locations,
-                builder: (BuildContext context, snapshot) {
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
                   List<Widget> children = [];
                   if (snapshot.hasData) {
-                    children = locationsPortion(snapshot.data);
+                    children = locationsPortion(snapshot.data, context);
                   } else if (snapshot.hasError) {
                     children = const [Text("Error getting info")];
                     debugPrint("Error getting data");

@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:pokeapi/model/encounter/encounter-condition-value.dart';
 import 'package:pokeapi/model/pokemon/pokemon.dart';
+import 'package:pokeapi/pokeapi.dart';
 import 'package:pokedexer_flutter/controllers/about/about_portion.dart';
 import 'package:pokedexer_flutter/controllers/evolutions/evolutions_portion.dart';
 import 'package:pokedexer_flutter/controllers/moves/moves_portion.dart';
@@ -28,8 +30,10 @@ Widget infoPortion(
 
   var species = getFromUrl(speciesUrl);
   var pdEnteries = getPokedexEnteries(speciesUrl);
-  // var locations = getPokemonLocation(pokeinfo.locationAreaEncounters!);
-  var locations = getFromUrl(pokeinfo.locationAreaEncounters!);
+  var locations = getPokemonLocation(pokeinfo.locationAreaEncounters!);
+  // var locations = getFromUrl(pokeinfo.locationAreaEncounters!);
+
+  
   // var evolutions = getEvolutions(speciesUrl);
   // List moves = pokeinfo.data["moves"];
 
