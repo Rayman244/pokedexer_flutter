@@ -15,8 +15,8 @@ List<Widget> statsNum(List statsList, int baseExp) {
 
 locationsPortion(allLocations) {
   List<Widget> varLocationEnteries = [];
-
-  for (var location in allLocations.data) {
+  List<dynamic> filteredLocations = allLocations.data.toSet().toList();
+  for (var location in filteredLocations) {
     // print(location);
     String minMaxLvl = "${location["min_level"]} - ${location["max_level"]} ";
     if (location["min_level"] == location["max_level"]) {
@@ -45,12 +45,12 @@ locationsPortion(allLocations) {
     ));
   }
   if (allLocations.data.length < 1) {
-    return  [
-       Column(
-         children: const [
-           Text("Not Found In Wild"),
-         ],
-       )
+    return [
+      Column(
+        children: const [
+          Text("Not Found In Wild"),
+        ],
+      )
     ];
   }
   return varLocationEnteries;

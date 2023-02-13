@@ -18,6 +18,8 @@ Widget infoPortion(
   int pokeHeight = pokeinfo.data["height"];
   int weight = pokeinfo.data["weight"];
   var types = pokeinfo.data["types"];
+  print('type');
+  print(types);
   var abilities = pokeinfo.data["abilities"];
   String speciesUrl = pokeinfo.data["species"]["url"];
 
@@ -34,19 +36,19 @@ Widget infoPortion(
         children: [
           Padding(
             padding: const EdgeInsets.all(20),
+            child: Text("#$pokeId"),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20),
             child: Text(
               pokeName,
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Text("#$pokeId"),
-          ),
+          getTypes(types),
         ],
       ),
-      getTypes(types),
+
       // PokeInfo.getPokemonData();
 
       Center(

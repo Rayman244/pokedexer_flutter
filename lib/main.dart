@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:pokedexer_flutter/Views/home2.dart';
 
 import 'Views/home.dart';
 
+final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
+
 void main() => runApp(const MyApp());
 
-
 /// myApp
-/// 
-/// page used as buffer for a possible db connnection to allow for async actions. 
+///
+/// page used as buffer for a possible db connnection to allow for async actions.
 ///
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -16,10 +18,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: _title,
-      home: HomeGrid()
+      navigatorKey: navKey,
+      routes: {
+        "/home": (context) => const HomeGrid(),
+        "/home2": (context) => const Home2(),
+      },
+      initialRoute: "/home2",
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(color: Colors.red),
+        primaryColor: Colors.red,
+      ),
     );
-    
   }
 }

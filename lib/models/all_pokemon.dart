@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pokedexer_flutter/models/extensions.dart';
+import 'package:pokedexer_flutter/models/pokemon/pokemon.dart';
 
 /// gets all the pokemon from the url provided limited to 20 results per page
 ///
 /// the [url] entered will determine the list of pokemon that are returned
 ///
+
 Future<List<Map<String, dynamic>>> getPokemon(url) async {
   List<Map<String, dynamic>> fullList = [];
   var uri = Uri.parse(url);
@@ -52,6 +54,9 @@ Future<Map<String, dynamic>> getIndividualData(int pokeId) async {
   var uri = Uri.parse("https://pokeapi.co/api/v2/pokemon/$pokeId");
   var request = await http.get(uri);
   var response = json.decode(request.body);
+
+  print(Pokemon.fromJson(response));
+
   return response;
 }
 

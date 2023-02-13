@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:pokedexer_flutter/views/poke_list.dart';
+import 'package:pokedexer_flutter/Views/utils/poke_list.dart';
+import 'package:pokedexer_flutter/constants.dart';
 import 'package:pokedexer_flutter/controllers/search_delegates.dart';
 
 import '../models/all_pokemon.dart' as poke_info;
 // import 'home_card.dart';
 
 /// current home page displays a list of all pokemon with a littloe info about them like there name number and there types
-///
+
 class HomeGrid extends StatefulWidget {
   const HomeGrid({Key? key}) : super(key: key);
 
@@ -15,14 +16,12 @@ class HomeGrid extends StatefulWidget {
 }
 
 class _HomeGridState extends State<HomeGrid> {
-  Future<List<Map<String, dynamic>>> pokeList =
-      poke_info.getPokemon("https://pokeapi.co/api/v2/pokemon/");
+  Future<List<Map<String, dynamic>>> pokeList = poke_info.getPokemon(baseUrl);
 
   @override
   Widget build(BuildContext context) {
     Widget child;
     bool isButtonActive = true;
-   
 
     toggleButton(buttonState) {
       if (buttonState == true) {
@@ -34,7 +33,8 @@ class _HomeGridState extends State<HomeGrid> {
           isButtonActive = true;
         });
       }
-    } 
+    }
+
     refresh(next) {
       setState(() {
         pokeList = poke_info.getPokemon(next);
@@ -59,7 +59,10 @@ class _HomeGridState extends State<HomeGrid> {
         builder: (BuildContext context,
             AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
           if (snapshot.hasData) {
-            child = allPokemon(snapshot, context, refresh, isButtonActive);
+            child =
+                allPokemon(snapshot.data!, context, refresh, isButtonActive);
+            // child =
+            //     AllPokemon(initialPokedata:snapshot.data!);
           } else if (snapshot.hasError) {
             child = const Text("Error Connecting To Database");
             debugPrint("Error populating list");
