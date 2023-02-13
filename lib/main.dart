@@ -27,7 +27,12 @@ class MyApp extends StatelessWidget {
       },
       initialRoute: "/home2",
       theme: ThemeData(
-        appBarTheme: const AppBarTheme(color: Colors.red),
+        appBarTheme: const AppBarTheme(
+            color: Colors.red,
+            titleTextStyle: TextStyle(
+                fontFamily: "PokemonSolid",
+                fontStyle: FontStyle.italic,
+                fontSize: 32)),
         primaryColor: Colors.red,
       ),
     );
