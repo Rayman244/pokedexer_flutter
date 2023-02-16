@@ -4,7 +4,6 @@ import 'package:pokedexer_flutter/controllers/evolutions/evolutions_portion.dart
 import 'package:pokedexer_flutter/controllers/moves/moves_portion.dart';
 import 'package:pokedexer_flutter/controllers/stats/stats_portion.dart';
 import '../models/extensions.dart';
-import '../controllers/my_widgets.dart';
 import '../models/all_pokemon.dart';
 
 ///  list of all the pokemon info [pokeinfo] and gets it ready to be displayed
@@ -45,7 +44,7 @@ Widget infoPortion(
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
-          getTypes(types),
+          // getTypes(types),
         ],
       ),
 

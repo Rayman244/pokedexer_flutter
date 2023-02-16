@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pokedexer_flutter/Views/home2.dart';
-
-import 'Views/home.dart';
+import 'package:pokedexer_flutter/Views/home.dart';
+import 'package:pokedexer_flutter/constants.dart';
 
 final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 
@@ -14,26 +13,40 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Pokedexer';
+  static const String _title = 'Pokédexer';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: _title,
       navigatorKey: navKey,
       routes: {
-        "/home": (context) => const HomeGrid(),
-        "/home2": (context) => const Home2(),
+        "/home": (context) => const Home(
+              title: _title,
+            ),
       },
-      initialRoute: "/home2",
+      initialRoute: "/home",
       theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-            color: Colors.red,
-            titleTextStyle: TextStyle(
-                fontFamily: "PokemonSolid",
-                fontStyle: FontStyle.italic,
-                fontSize: 32)),
-        primaryColor: Colors.red,
+        appBarTheme: AppBarTheme(
+          color: PokeColors.red,
+          titleTextStyle: const TextStyle(
+            fontFamily: "PokemonSolid",
+            fontSize: 32,
+            // color: PokeColors.darkYellow,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: PokeColors.blue,
+            backgroundColor: PokeColors.yellow,
+            shadowColor: PokeColors.blue,
+            side: BorderSide(color: PokeColors.blue),
+            textStyle: TextStyle(
+              color: PokeColors.blue,
+              fontSize: 20,
+              fontFamily: "PokemonSolid",
+            ),
+          ),
+        ),
       ),
     );
   }

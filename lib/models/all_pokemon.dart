@@ -11,26 +11,36 @@ import 'package:pokedexer_flutter/models/pokemon/pokemon.dart';
 ///
 
 Future<List<Map<String, dynamic>>> getPokemon(url) async {
+  List<Pokemon> pokemonList = [];
   List<Map<String, dynamic>> fullList = [];
   var uri = Uri.parse(url);
   var request = await http.get(uri);
   var response = json.decode(request.body);
   var next = {"next": response["next"]};
   var prev = {
-    "prev": response["previous"] ?? "https://pokeapi.co/api/v2/pokemon/"
+    "prev": response["previous"] 
   };
+  List<Map<String, dynamic>> fullList2 = [
+    {
+      'navigation': [next, prev]
+    }
+  ];
   fullList.add(next);
   fullList.add(prev);
 
-  for (var pokemon in response['results']) {
+  for (var pokemonInfo in response['results']) {
     // getPokeByUrl(pokemon['url']);
-    var uri2 = Uri.parse(pokemon['url']);
+    var uri2 = Uri.parse(pokemonInfo['url']);
     var req2 = await http.get(uri2);
     var response2 = json.decode(req2.body);
+    Pokemon pokemon = Pokemon.fromJson(response2);
+    pokemonList.add(pokemon);
+    // print(response2);
     fullList.add(response2);
   }
+  fullList2.add({"pokemon": pokemonList});
 
-  return fullList;
+  return fullList2;
 }
 
 /// gets pokemons information about a pokemon

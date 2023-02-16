@@ -15,7 +15,7 @@ class PokePage extends StatefulWidget {
       : super(key: key);
   final int pokeId;
   final String name;
-  final String mainType;
+  final String? mainType;
   final String? secType;
 
   @override

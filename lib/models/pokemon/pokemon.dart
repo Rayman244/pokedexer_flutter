@@ -5,6 +5,7 @@ class Pokemon {
   String? name;
   int? baseExperience;
   int? height;
+  String? origionalArtworkFrontDefault;
   bool? isDefault;
   int? order;
   int? weight;
@@ -23,6 +24,7 @@ class Pokemon {
       this.name,
       this.baseExperience,
       this.height,
+      this.origionalArtworkFrontDefault,
       this.isDefault,
       this.order,
       this.weight,
@@ -41,6 +43,7 @@ class Pokemon {
     name = json['name'];
     baseExperience = json['base_experience'];
     height = json['height'];
+    origionalArtworkFrontDefault = json["sprites"]["other"]["official-artwork"]["front_default"];
     isDefault = json['is_default'];
     order = json['order'];
     weight = json['weight'];
