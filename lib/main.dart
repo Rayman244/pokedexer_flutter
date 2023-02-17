@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           color: PokeColors.red,
           titleTextStyle: const TextStyle(
-            fontFamily: "PokemonSolid",
+            // fontFamily: "PokemonSolid",
             fontSize: 32,
             // color: PokeColors.darkYellow,
           ),

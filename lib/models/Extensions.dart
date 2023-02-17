@@ -27,10 +27,10 @@ String eachCap(String str) {
 ///
 ///takes the total [decameters] a pokemon is and converts it to feet.
 ///
-String dectoft(int decameters) {
+String dectoft(int? decameters) {
   double ft = 0.3280839895;
 
-  return (decameters * ft).toStringAsFixed(2);
+  return (decameters ?? 0 * ft).toStringAsFixed(2);
 }
 
 /// converts hectograms to pounds

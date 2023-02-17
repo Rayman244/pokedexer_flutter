@@ -153,7 +153,7 @@ List<String> pokemonNames = [
   "Mew"
 ];
 
-Map<String,int> typeColors = {
+Map<String,int?> typeColors = {
 	"normal": 0xFFA8A77A,
 	'fire': 0xFFEE8130,
 	'water': 0xFF6390F0,

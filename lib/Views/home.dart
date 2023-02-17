@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
                   if (snapshot.connectionState == ConnectionState.done) {
                     dataLoaded = true;
                     List<Map<String, dynamic>> data = snapshot.data!;
-                   
+
                     Future.delayed(Duration.zero, () {
                       setState(() {
                         nextLink = data[0]["navigation"][0]["next"];
@@ -92,27 +92,25 @@ class _HomeState extends State<Home> {
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     Pokemon pokemon = data[1]['pokemon'][index];
-
-                                    // var pokeId = pokemon["id"];
-                                    // var pokeName = my_extensions
-                                    //     .capitalize(pokemon["name"]);
-                                    // String pokeImg = pokemon["sprites"]["other"]
-                                    //     ["official-artwork"]["front_default"];
-                                    // var pokeTypes = pokemon["types"];
                                     String pokeMainType =
                                         pokemon.types![0].type!.name!;
 
-                                    late String pokeSecType;
+                                    String? pokeSecType;
+                                    Color? secondryColor;
                                     try {
                                       pokeSecType =
-                                          pokemon.types![1].type!.name!;
+                                          pokemon.types![1].type!.name;
                                     } catch (e) {
-                                      pokeSecType = pokeMainType;
+                                      // pokeSecType = pokeMainType;
                                     }
                                     Color primaryColor =
                                         Color(typeColors[pokeMainType]!);
-                                    Color secondryColor =
-                                        Color(typeColors[pokeSecType]!.toInt());
+                                    try {
+                                      secondryColor =
+                                          Color(typeColors[pokeSecType]!);
+                                    } catch (e) {
+                                      // print(e);
+                                    }
 
                                     return Card(
                                       shape: const RoundedRectangleBorder(
@@ -127,25 +125,23 @@ class _HomeState extends State<Home> {
                                                 end: Alignment.topLeft,
                                                 colors: [
                                                   primaryColor,
-                                                  secondryColor
+                                                  secondryColor ?? primaryColor
                                                 ]),
                                             borderRadius:
                                                 const BorderRadius.all(
                                                     Radius.circular(10))),
-                                        child: InkWell(
-                                          splashColor: Colors.red,
+                                        child: GestureDetector(
                                           // onTap: () =>print( poke_info.getIndividualData(poke_url)),
                                           onTap: () =>
                                               // Navigator.push(ctx, PokePage());
                                               Navigator.of(context)
                                                   .push(MaterialPageRoute(
                                                       builder: (_) => PokePage(
-                                                            pokeId: pokemon.id!,
-                                                            name: pokemon.name!,
-                                                            mainType:
-                                                                pokeMainType,
-                                                            secType:
-                                                                pokeSecType,
+                                                            pokemon: pokemon,
+                                                            primaryColor:
+                                                                primaryColor,
+                                                            secondaryColor:
+                                                                secondryColor,
                                                           ))),
                                           child: Column(
                                             children: [

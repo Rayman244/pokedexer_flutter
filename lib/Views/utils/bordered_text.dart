@@ -6,12 +6,12 @@ class BorderedText extends StatelessWidget {
       required this.title,
       required this.color,
       required this.borderColor,
-      required this.size,
+      this.size = 16,
       this.strokeWidth = 9});
   final String title;
   final Color color;
   final Color borderColor;
-  final double size;
+  final double? size;
   final double? strokeWidth;
   @override
   Widget build(BuildContext context) {
@@ -21,6 +21,7 @@ class BorderedText extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
+            fontFamily: "PokemonSolid",
             fontSize: size,
             foreground: Paint()
               ..style = PaintingStyle.stroke
@@ -32,6 +33,7 @@ class BorderedText extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
+            fontFamily: "PokemonSolid",
             fontSize: size,
             color: color,
           ),

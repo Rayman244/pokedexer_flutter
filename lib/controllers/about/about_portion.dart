@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../models/extensions.dart';
 import 'about_widgets.dart';
-/// displays the information in the about section in the slide bar using the [height] in ft and [weight] in lbs. 
+
+/// displays the information in the about section in the slide bar using the [height] in ft and [weight] in lbs.
 /// Gets the different types of [species] a pokemon can be and displays them in the correct position.
-/// lastly retreves all of the [pdEnteries] (pokedex enteries) and displays all of them as well with the versions in a column to the left and the description the matches to the right    
+/// lastly retreves all of the [pdEnteries] (pokedex enteries) and displays all of them as well with the versions in a column to the left and the description the matches to the right
 Widget aboutPortion(height, weight, species, abilities, pdEnteries) {
   return SingleChildScrollView(
     child: Column(
@@ -68,21 +69,21 @@ Widget aboutPortion(height, weight, species, abilities, pdEnteries) {
                         Text("${heToLb(weight)} lbs"),
                       ],
                     ),
-                    FutureBuilder(
-                      future: species,
-                      builder: (BuildContext context, snapshot) {
-                        List<Widget> children = [];
-                        if (snapshot.hasData) {
-                          children = speciesPortion(snapshot);
-                        } else if (snapshot.hasError) {
-                          children = const [Text("Error getting info")];
-                          debugPrint("Error getting data");
-                        }
-                        return Row(
-                          children: children,
-                        );
-                      },
-                    ),
+                    // FutureBuilder(
+                    //   future: species,
+                    //   builder: (BuildContext context, snapshot) {
+                    //     List<Widget> children = [];
+                    //     if (snapshot.hasData) {
+                    //       children = speciesPortion(snapshot);
+                    //     } else if (snapshot.hasError) {
+                    //       children = const [Text("Error getting info")];
+                    //       debugPrint("Error getting data");
+                    //     }
+                    //     return Row(
+                    //       children: children,
+                    //     );
+                    //   },
+                    // ),
                     Row(
                       children:[abilitiesPortion(abilities)],
                     ),
