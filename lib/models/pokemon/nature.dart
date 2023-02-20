@@ -58,31 +58,31 @@ class Nature {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    if (this.decreasedStat != null) {
-      data['decreased_stat'] = this.decreasedStat!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    if (decreasedStat != null) {
+      data['decreased_stat'] = decreasedStat!.toJson();
     }
-    if (this.increasedStat != null) {
-      data['increased_stat'] = this.increasedStat!.toJson();
+    if (increasedStat != null) {
+      data['increased_stat'] = increasedStat!.toJson();
     }
-    if (this.likesFlavor != null) {
-      data['likes_flavor'] = this.likesFlavor!.toJson();
+    if (likesFlavor != null) {
+      data['likes_flavor'] = likesFlavor!.toJson();
     }
-    if (this.hatesFlavor != null) {
-      data['hates_flavor'] = this.hatesFlavor!.toJson();
+    if (hatesFlavor != null) {
+      data['hates_flavor'] = hatesFlavor!.toJson();
     }
-    if (this.pokeathlonStatChanges != null) {
+    if (pokeathlonStatChanges != null) {
       data['pokeathlon_stat_changes'] =
-          this.pokeathlonStatChanges!.map((v) => v.toJson()).toList();
+          pokeathlonStatChanges!.map((v) => v.toJson()).toList();
     }
-    if (this.moveBattleStylePreferences != null) {
+    if (moveBattleStylePreferences != null) {
       data['move_battle_style_preferences'] =
-          this.moveBattleStylePreferences!.map((v) => v.toJson()).toList();
+          moveBattleStylePreferences!.map((v) => v.toJson()).toList();
     }
-    if (this.names != null) {
-      data['names'] = this.names!.map((v) => v.toJson()).toList();
+    if (names != null) {
+      data['names'] = names!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -107,10 +107,10 @@ class PokeathlonStatChanges {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['max_change'] = this.maxChange;
-    if (this.pokeathlonStat != null) {
-      data['pokeathlon_stat'] = this.pokeathlonStat!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['max_change'] = maxChange;
+    if (pokeathlonStat != null) {
+      data['pokeathlon_stat'] = pokeathlonStat!.toJson();
     }
     return data;
   }
@@ -138,11 +138,11 @@ class MoveBattleStylePreferences {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['low_hp_preference'] = this.lowHpPreference;
-    data['high_hp_preference'] = this.highHpPreference;
-    if (this.moveBattleStyle != null) {
-      data['move_battle_style'] = this.moveBattleStyle!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['low_hp_preference'] = lowHpPreference;
+    data['high_hp_preference'] = highHpPreference;
+    if (moveBattleStyle != null) {
+      data['move_battle_style'] = moveBattleStyle!.toJson();
     }
     return data;
   }
@@ -167,10 +167,10 @@ class Names {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['name'] = this.name;
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
     return data;
   }

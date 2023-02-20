@@ -1,23 +1,26 @@
 import 'package:pokedexer_flutter/models/utils/common.dart';
 
-class Version {
-  List<VersionName>? names;
-  NamedAPIResource? versionGroup;
+class MoveAilment {
+  List<MoveAilmantNames>? names;
+  List<NamedAPIResource>? moves;
   String? name;
   int? id;
 
-  Version({this.names, this.versionGroup, this.name, this.id});
+  MoveAilment({this.names, this.moves, this.name, this.id});
 
-  Version.fromJson(Map<String, dynamic> json) {
+  MoveAilment.fromJson(Map<String, dynamic> json) {
     if (json['names'] != null) {
-      names = <VersionName>[];
+      names = <MoveAilmantNames>[];
       for (var v in (json['names'] as List)) {
-        names!.add(VersionName.fromJson(v));
+        names!.add(MoveAilmantNames.fromJson(v));
       }
     }
-    versionGroup = json['version_group'] != null
-        ? NamedAPIResource.fromJson(json['version_group'])
-        : null;
+    if (json['moves'] != null) {
+      moves = <NamedAPIResource>[];
+      for (var v in (json['moves'] as List)) {
+        moves!.add(NamedAPIResource.fromJson(v));
+      }
+    }
     name = json['name'];
     id = json['id'];
   }
@@ -27,8 +30,8 @@ class Version {
     if (names != null) {
       data['names'] = names!.map((v) => v.toJson()).toList();
     }
-    if (versionGroup != null) {
-      data['version_group'] = versionGroup!.toJson();
+    if (moves != null) {
+      data['moves'] = moves!.map((v) => v.toJson()).toList();
     }
     data['name'] = name;
     data['id'] = id;
@@ -37,17 +40,17 @@ class Version {
 
   @override
   String toString() {
-    return 'Version{names: $names, versionGroup: $versionGroup, name: $name, id: $id}';
+    return 'MoveAilment{names: $names, moves: $moves, name: $name, id: $id}';
   }
 }
 
-class VersionName {
+class MoveAilmantNames {
   String? name;
   NamedAPIResource? language;
 
-  VersionName({this.name, this.language});
+  MoveAilmantNames({this.name, this.language});
 
-  VersionName.fromJson(Map<String, dynamic> json) {
+  MoveAilmantNames.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     language = json['language'] != null
         ? NamedAPIResource.fromJson(json['language'])
@@ -65,6 +68,6 @@ class VersionName {
 
   @override
   String toString() {
-    return 'VersionName{name: $name, language: $language}';
+    return 'MoveAilmantNames{name: $name, language: $language}';
   }
 }

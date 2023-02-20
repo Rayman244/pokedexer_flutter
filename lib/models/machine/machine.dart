@@ -10,29 +10,29 @@ class Machine {
 
   Machine.fromJson(Map<String, dynamic> json) {
     item = json['item'] != null
-        ? new NamedAPIResource.fromJson(json['item'])
+        ? NamedAPIResource.fromJson(json['item'])
         : null;
     move = json['move'] != null
-        ? new NamedAPIResource.fromJson(json['move'])
+        ? NamedAPIResource.fromJson(json['move'])
         : null;
     versionGroup = json['version_group'] != null
-        ? new NamedAPIResource.fromJson(json['version_group'])
+        ? NamedAPIResource.fromJson(json['version_group'])
         : null;
     id = json['id'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.item != null) {
-      data['item'] = this.item!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (item != null) {
+      data['item'] = item!.toJson();
     }
-    if (this.move != null) {
-      data['move'] = this.move!.toJson();
+    if (move != null) {
+      data['move'] = move!.toJson();
     }
-    if (this.versionGroup != null) {
-      data['version_group'] = this.versionGroup!.toJson();
+    if (versionGroup != null) {
+      data['version_group'] = versionGroup!.toJson();
     }
-    data['id'] = this.id;
+    data['id'] = id;
     return data;
   }
 

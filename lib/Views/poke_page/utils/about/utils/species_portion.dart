@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedexer_flutter/models/extensions.dart';
-import 'package:pokedexer_flutter/models/pokemon/egg-group.dart';
+import 'package:pokedexer_flutter/models/pokemon/egg_group.dart';
 
 class SpeciesPortion extends StatelessWidget {
   const SpeciesPortion({super.key, this.eggGroup});

@@ -24,52 +24,52 @@ class Region {
         : null;
     if (json['names'] != null) {
       names = <RegionName>[];
-      (json['names'] as List).forEach((v) {
+      for (var v in (json['names'] as List)) {
         names!.add(RegionName.fromJson(v));
-      });
+      }
     }
     if (json['pokedexes'] != null) {
       pokedexes = <NamedAPIResource>[];
-      (json['pokedexes'] as List).forEach((v) {
+      for (var v in (json['pokedexes'] as List)) {
         pokedexes!.add(NamedAPIResource.fromJson(v));
-      });
+      }
     }
     if (json['version_groups'] != null) {
       versionGroups = <NamedAPIResource>[];
-      (json['version_groups'] as List).forEach((v) {
+      for (var v in (json['version_groups'] as List)) {
         versionGroups!.add(NamedAPIResource.fromJson(v));
-      });
+      }
     }
     name = json['name'];
     if (json['locations'] != null) {
       locations = <NamedAPIResource>[];
-      (json['locations'] as List).forEach((v) {
+      for (var v in (json['locations'] as List)) {
         locations!.add(NamedAPIResource.fromJson(v));
-      });
+      }
     }
     id = json['id'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    if (this.mainGeneration != null) {
-      data['main_generation'] = this.mainGeneration!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (mainGeneration != null) {
+      data['main_generation'] = mainGeneration!.toJson();
     }
-    if (this.names != null) {
-      data['names'] = this.names!.map((v) => v.toJson()).toList();
+    if (names != null) {
+      data['names'] = names!.map((v) => v.toJson()).toList();
     }
-    if (this.pokedexes != null) {
-      data['pokedexes'] = this.pokedexes!.map((v) => v.toJson()).toList();
+    if (pokedexes != null) {
+      data['pokedexes'] = pokedexes!.map((v) => v.toJson()).toList();
     }
-    if (this.versionGroups != null) {
+    if (versionGroups != null) {
       data['version_groups'] =
-          this.versionGroups!.map((v) => v.toJson()).toList();
+          versionGroups!.map((v) => v.toJson()).toList();
     }
-    data['name'] = this.name;
-    if (this.locations != null) {
-      data['locations'] = this.locations!.map((v) => v.toJson()).toList();
+    data['name'] = name;
+    if (locations != null) {
+      data['locations'] = locations!.map((v) => v.toJson()).toList();
     }
-    data['id'] = this.id;
+    data['id'] = id;
     return data;
   }
 
@@ -93,10 +93,10 @@ class RegionName {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['name'] = this.name;
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
     return data;
   }

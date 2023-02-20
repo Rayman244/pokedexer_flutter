@@ -25,73 +25,73 @@ class Generation {
   Generation.fromJson(Map<String, dynamic> json) {
     if (json['abilities'] != null) {
       abilities = <NamedAPIResource>[];
-      (json['abilities'] as List).forEach((v) {
+      for (var v in (json['abilities'] as List)) {
         abilities!.add(NamedAPIResource.fromJson(v));
-      });
+      }
     }
     if (json['types'] != null) {
       types = <NamedAPIResource>[];
-      (json['types'] as List).forEach((v) {
+      for (var v in (json['types'] as List)) {
         types!.add(NamedAPIResource.fromJson(v));
-      });
+      }
     }
     if (json['names'] != null) {
       names = <GenerationName>[];
-      (json['names'] as List).forEach((v) {
+      for (var v in (json['names'] as List)) {
         names!.add(GenerationName.fromJson(v));
-      });
+      }
     }
     mainRegion = json['main_region'] != null
         ? NamedAPIResource.fromJson(json['main_region'])
         : null;
     if (json['version_groups'] != null) {
       versionGroups = <NamedAPIResource>[];
-      (json['version_groups'] as List).forEach((v) {
+      for (var v in (json['version_groups'] as List)) {
         versionGroups!.add(NamedAPIResource.fromJson(v));
-      });
+      }
     }
     if (json['moves'] != null) {
       moves = <NamedAPIResource>[];
-      (json['moves'] as List).forEach((v) {
+      for (var v in (json['moves'] as List)) {
         moves!.add(NamedAPIResource.fromJson(v));
-      });
+      }
     }
     name = json['name'];
     id = json['id'];
     if (json['pokemon_species'] != null) {
       pokemonSpecies = <NamedAPIResource>[];
-      (json['pokemon_species'] as List).forEach((v) {
+      for (var v in (json['pokemon_species'] as List)) {
         pokemonSpecies!.add(NamedAPIResource.fromJson(v));
-      });
+      }
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    if (this.abilities != null) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (abilities != null) {
       data['abilities'] = [];
     }
-    if (this.types != null) {
-      data['types'] = this.types!.map((v) => v.toJson()).toList();
+    if (types != null) {
+      data['types'] = types!.map((v) => v.toJson()).toList();
     }
-    if (this.names != null) {
-      data['names'] = this.names!.map((v) => v.toJson()).toList();
+    if (names != null) {
+      data['names'] = names!.map((v) => v.toJson()).toList();
     }
-    if (this.mainRegion != null) {
-      data['main_region'] = this.mainRegion!.toJson();
+    if (mainRegion != null) {
+      data['main_region'] = mainRegion!.toJson();
     }
-    if (this.versionGroups != null) {
+    if (versionGroups != null) {
       data['version_groups'] =
-          this.versionGroups!.map((v) => v.toJson()).toList();
+          versionGroups!.map((v) => v.toJson()).toList();
     }
-    if (this.moves != null) {
-      data['moves'] = this.moves!.map((v) => v.toJson()).toList();
+    if (moves != null) {
+      data['moves'] = moves!.map((v) => v.toJson()).toList();
     }
-    data['name'] = this.name;
-    data['id'] = this.id;
-    if (this.pokemonSpecies != null) {
+    data['name'] = name;
+    data['id'] = id;
+    if (pokemonSpecies != null) {
       data['pokemon_species'] =
-          this.pokemonSpecies!.map((v) => v.toJson()).toList();
+          pokemonSpecies!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -116,10 +116,10 @@ class GenerationName {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['name'] = this.name;
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
     return data;
   }

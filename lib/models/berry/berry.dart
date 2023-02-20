@@ -55,27 +55,27 @@ class Berry {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  Map<String, dynamic>();
-    if (this.firmness != null) {
-      data['firmness'] = this.firmness!.toJson();
+    final Map<String, dynamic> data =  <String, dynamic>{};
+    if (firmness != null) {
+      data['firmness'] = firmness!.toJson();
     }
-    if (this.flavors != null) {
-      data['flavors'] = this.flavors!.map((v) => v.toJson()).toList();
+    if (flavors != null) {
+      data['flavors'] = flavors!.map((v) => v.toJson()).toList();
     }
-    data['growth_time'] = this.growthTime;
-    data['id'] = this.id;
-    if (this.item != null) {
-      data['item'] = this.item!.toJson();
+    data['growth_time'] = growthTime;
+    data['id'] = id;
+    if (item != null) {
+      data['item'] = item!.toJson();
     }
-    data['max_harvest'] = this.maxHarvest;
-    data['name'] = this.name;
-    data['natural_gift_power'] = this.naturalGiftPower;
-    if (this.naturalGiftType != null) {
-      data['natural_gift_type'] = this.naturalGiftType!.toJson();
+    data['max_harvest'] = maxHarvest;
+    data['name'] = name;
+    data['natural_gift_power'] = naturalGiftPower;
+    if (naturalGiftType != null) {
+      data['natural_gift_type'] = naturalGiftType!.toJson();
     }
-    data['size'] = this.size;
-    data['smoothness'] = this.smoothness;
-    data['soil_dryness'] = this.soilDryness;
+    data['size'] = size;
+    data['smoothness'] = smoothness;
+    data['soil_dryness'] = soilDryness;
     return data;
   }
 
@@ -99,11 +99,11 @@ class Flavors {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  Map<String, dynamic>();
-    if (this.flavor != null) {
-      data['flavor'] = this.flavor!.toJson();
+    final Map<String, dynamic> data =  <String, dynamic>{};
+    if (flavor != null) {
+      data['flavor'] = flavor!.toJson();
     }
-    data['potency'] = this.potency;
+    data['potency'] = potency;
     return data;
   }
 

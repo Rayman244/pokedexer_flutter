@@ -30,15 +30,15 @@ class Characteristic {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['gene_modulo'] = this.geneModulo;
-    data['possible_values'] = this.possibleValues;
-    if (this.highestStat != null) {
-      data['highest_stat'] = this.highestStat!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['gene_modulo'] = geneModulo;
+    data['possible_values'] = possibleValues;
+    if (highestStat != null) {
+      data['highest_stat'] = highestStat!.toJson();
     }
-    if (this.descriptions != null) {
-      data['descriptions'] = this.descriptions!.map((v) => v.toJson()).toList();
+    if (descriptions != null) {
+      data['descriptions'] = descriptions!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -63,10 +63,10 @@ class Descriptions {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['description'] = this.description;
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['description'] = description;
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
     return data;
   }

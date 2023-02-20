@@ -76,9 +76,9 @@ class Move {
         : null;
     if (json['effect_entries'] != null) {
       effectEntries = <MoveEffectEntry>[];
-      (json['effect_entries'] as List).forEach((v) {
+      for (var v in (json['effect_entries'] as List)) {
         effectEntries!.add(MoveEffectEntry.fromJson(v));
-      });
+      }
     }
     contestType = json['contest_type'] != null
         ? NamedAPIResource.fromJson(json['contest_type'])
@@ -88,16 +88,16 @@ class Move {
     }
     if (json['names'] != null) {
       names = <MoveName>[];
-      (json['names'] as List).forEach((v) {
+      for (var v in (json['names'] as List)) {
         names!.add(MoveName.fromJson(v));
-      });
+      }
     }
     meta = json['meta'] != null ? MoveMeta.fromJson(json['meta']) : null;
     if (json['flavor_text_entries'] != null) {
       flavorTextEntries = <MoveFlavorTextEntry>[];
-      (json['flavor_text_entries'] as List).forEach((v) {
+      for (var v in (json['flavor_text_entries'] as List)) {
         flavorTextEntries!.add(MoveFlavorTextEntry.fromJson(v));
-      });
+      }
     }
     damageClass = json['damage_class'] != null
         ? NamedAPIResource.fromJson(json['damage_class'])
@@ -115,63 +115,63 @@ class Move {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    if (this.generation != null) {
-      data['generation'] = this.generation!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (generation != null) {
+      data['generation'] = generation!.toJson();
     }
-    data['pp'] = this.pp;
-    if (this.statChanges != null) {
+    data['pp'] = pp;
+    if (statChanges != null) {
       data['stat_changes'] = [];
     }
-    data['accuracy'] = this.accuracy;
-    if (this.contestCombos != null) {
-      data['contest_combos'] = this.contestCombos!.toJson();
+    data['accuracy'] = accuracy;
+    if (contestCombos != null) {
+      data['contest_combos'] = contestCombos!.toJson();
     }
-    data['priority'] = this.priority;
-    if (this.superContestEffect != null) {
-      data['super_contest_effect'] = this.superContestEffect!.toJson();
+    data['priority'] = priority;
+    if (superContestEffect != null) {
+      data['super_contest_effect'] = superContestEffect!.toJson();
     }
-    if (this.type != null) {
-      data['type'] = this.type!.toJson();
+    if (type != null) {
+      data['type'] = type!.toJson();
     }
-    if (this.effectChanges != null) {
+    if (effectChanges != null) {
       data['effect_changes'] = [];
     }
-    if (this.target != null) {
-      data['target'] = this.target!.toJson();
+    if (target != null) {
+      data['target'] = target!.toJson();
     }
-    if (this.effectEntries != null) {
+    if (effectEntries != null) {
       data['effect_entries'] =
-          this.effectEntries!.map((v) => v.toJson()).toList();
+          effectEntries!.map((v) => v.toJson()).toList();
     }
-    if (this.contestType != null) {
-      data['contest_type'] = this.contestType!.toJson();
+    if (contestType != null) {
+      data['contest_type'] = contestType!.toJson();
     }
-    if (this.pastValues != null) {
+    if (pastValues != null) {
       data['past_values'] = [];
     }
-    if (this.names != null) {
-      data['names'] = this.names!.map((v) => v.toJson()).toList();
+    if (names != null) {
+      data['names'] = names!.map((v) => v.toJson()).toList();
     }
-    if (this.meta != null) {
-      data['meta'] = this.meta!.toJson();
+    if (meta != null) {
+      data['meta'] = meta!.toJson();
     }
-    if (this.flavorTextEntries != null) {
+    if (flavorTextEntries != null) {
       data['flavor_text_entries'] =
-          this.flavorTextEntries!.map((v) => v.toJson()).toList();
+          flavorTextEntries!.map((v) => v.toJson()).toList();
     }
-    if (this.damageClass != null) {
-      data['damage_class'] = this.damageClass!.toJson();
+    if (damageClass != null) {
+      data['damage_class'] = damageClass!.toJson();
     }
-    data['name'] = this.name;
-    data['effect_chance'] = this.effectChance;
-    data['id'] = this.id;
-    if (this.machines != null) {
+    data['name'] = name;
+    data['effect_chance'] = effectChance;
+    data['id'] = id;
+    if (machines != null) {
       data['machines'] = [];
     }
-    data['power'] = this.power;
-    if (this.contestEffect != null) {
-      data['contest_effect'] = this.contestEffect!.toJson();
+    data['power'] = power;
+    if (contestEffect != null) {
+      data['contest_effect'] = contestEffect!.toJson();
     }
     return data;
   }
@@ -198,12 +198,12 @@ class MoveContestCombos {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    if (this.xSuper != null) {
-      data['super'] = this.xSuper!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (xSuper != null) {
+      data['super'] = xSuper!.toJson();
     }
-    if (this.normal != null) {
-      data['normal'] = this.normal!.toJson();
+    if (normal != null) {
+      data['normal'] = normal!.toJson();
     }
     return data;
   }
@@ -226,9 +226,9 @@ class MoveContestCombosSuper {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['use_after'] = this.useAfter;
-    data['use_before'] = this.useBefore;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['use_after'] = useAfter;
+    data['use_before'] = useBefore;
     return data;
   }
 
@@ -248,17 +248,17 @@ class MoveContestCombosNormal {
     useAfter = json['use_after'];
     if (json['use_before'] != null) {
       useBefore = <NamedAPIResource>[];
-      (json['use_before'] as List).forEach((v) {
+      for (var v in (json['use_before'] as List)) {
         useBefore!.add(NamedAPIResource.fromJson(v));
-      });
+      }
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['use_after'] = this.useAfter;
-    if (this.useBefore != null) {
-      data['use_before'] = this.useBefore!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['use_after'] = useAfter;
+    if (useBefore != null) {
+      data['use_before'] = useBefore!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -285,11 +285,11 @@ class MoveEffectEntry {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['short_effect'] = this.shortEffect;
-    data['effect'] = this.effect;
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['short_effect'] = shortEffect;
+    data['effect'] = effect;
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
     return data;
   }
@@ -314,10 +314,10 @@ class MoveName {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['name'] = this.name;
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
     return data;
   }
@@ -376,23 +376,23 @@ class MoveMeta {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['healing'] = this.healing;
-    data['min_hits'] = this.minHits;
-    data['max_hits'] = this.maxHits;
-    data['ailment_chance'] = this.ailmentChance;
-    data['crit_rate'] = this.critRate;
-    data['flinch_chance'] = this.flinchChance;
-    data['min_turns'] = this.minTurns;
-    if (this.ailment != null) {
-      data['ailment'] = this.ailment!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['healing'] = healing;
+    data['min_hits'] = minHits;
+    data['max_hits'] = maxHits;
+    data['ailment_chance'] = ailmentChance;
+    data['crit_rate'] = critRate;
+    data['flinch_chance'] = flinchChance;
+    data['min_turns'] = minTurns;
+    if (ailment != null) {
+      data['ailment'] = ailment!.toJson();
     }
-    if (this.category != null) {
-      data['category'] = this.category!.toJson();
+    if (category != null) {
+      data['category'] = category!.toJson();
     }
-    data['max_turns'] = this.maxTurns;
-    data['drain'] = this.drain;
-    data['stat_chance'] = this.statChance;
+    data['max_turns'] = maxTurns;
+    data['drain'] = drain;
+    data['stat_chance'] = statChance;
     return data;
   }
 
@@ -420,14 +420,14 @@ class MoveFlavorTextEntry {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    if (this.versionGroup != null) {
-      data['version_group'] = this.versionGroup!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (versionGroup != null) {
+      data['version_group'] = versionGroup!.toJson();
     }
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
-    data['flavor_text'] = this.flavorText;
+    data['flavor_text'] = flavorText;
     return data;
   }
 

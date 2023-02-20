@@ -1,31 +1,26 @@
 import 'package:pokedexer_flutter/models/utils/common.dart';
 
-class Language {
+class PokemonHabitat {
   int? id;
   String? name;
-  bool? official;
-  String? iso639;
-  String? iso3166;
   List<Names>? names;
+  List<NamedAPIResource>? pokemonSpecies;
 
-  Language(
-      {this.id,
-      this.name,
-      this.official,
-      this.iso639,
-      this.iso3166,
-      this.names});
+  PokemonHabitat({this.id, this.name, this.names, this.pokemonSpecies});
 
-  Language.fromJson(Map<String, dynamic> json) {
+  PokemonHabitat.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    official = json['official'];
-    iso639 = json['iso639'];
-    iso3166 = json['iso3166'];
     if (json['names'] != null) {
       names = <Names>[];
       json['names'].forEach((v) {
         names!.add(Names.fromJson(v));
+      });
+    }
+    if (json['pokemon_species'] != null) {
+      pokemonSpecies = <NamedAPIResource>[];
+      json['pokemon_species'].forEach((v) {
+        pokemonSpecies!.add(NamedAPIResource.fromJson(v));
       });
     }
   }
@@ -34,13 +29,19 @@ class Language {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
-    data['official'] = official;
-    data['iso639'] = iso639;
-    data['iso3166'] = iso3166;
     if (names != null) {
       data['names'] = names!.map((v) => v.toJson()).toList();
     }
+    if (pokemonSpecies != null) {
+      data['pokemon_species'] =
+          pokemonSpecies!.map((v) => v.toJson()).toList();
+    }
     return data;
+  }
+
+  @override
+  String toString() {
+    return 'PokemonHabitat{id: $id, name: $name, names: $names, pokemonSpecies: $pokemonSpecies}';
   }
 }
 
@@ -64,5 +65,10 @@ class Names {
       data['language'] = language!.toJson();
     }
     return data;
+  }
+
+  @override
+  String toString() {
+    return 'Names{name: $name, language: $language}';
   }
 }

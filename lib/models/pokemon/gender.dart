@@ -30,16 +30,16 @@ class Gender {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    if (this.pokemonSpeciesDetails != null) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    if (pokemonSpeciesDetails != null) {
       data['pokemon_species_details'] =
-          this.pokemonSpeciesDetails!.map((v) => v.toJson()).toList();
+          pokemonSpeciesDetails!.map((v) => v.toJson()).toList();
     }
-    if (this.requiredForEvolution != null) {
+    if (requiredForEvolution != null) {
       data['required_for_evolution'] =
-          this.requiredForEvolution!.map((v) => v.toJson()).toList();
+          requiredForEvolution!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -64,10 +64,10 @@ class PokemonSpeciesDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['rate'] = this.rate;
-    if (this.pokemonSpecies != null) {
-      data['pokemon_species'] = this.pokemonSpecies!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['rate'] = rate;
+    if (pokemonSpecies != null) {
+      data['pokemon_species'] = pokemonSpecies!.toJson();
     }
     return data;
   }

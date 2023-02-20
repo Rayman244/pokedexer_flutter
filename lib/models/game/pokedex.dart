@@ -24,51 +24,51 @@ class Pokedex {
     isMainSeries = json['is_main_series'];
     if (json['pokemon_entries'] != null) {
       pokemonEntries = <PokedexPokemonEntry>[];
-      (json['pokemon_entries'] as List).forEach((v) {
-        pokemonEntries!.add(new PokedexPokemonEntry.fromJson(v));
-      });
+      for (var v in (json['pokemon_entries'] as List)) {
+        pokemonEntries!.add(PokedexPokemonEntry.fromJson(v));
+      }
     }
     if (json['names'] != null) {
       names = <PokedexName>[];
-      (json['names'] as List).forEach((v) {
-        names!.add(new PokedexName.fromJson(v));
-      });
+      for (var v in (json['names'] as List)) {
+        names!.add(PokedexName.fromJson(v));
+      }
     }
     if (json['version_groups'] != null) {
       versionGroups = <NamedAPIResource>[];
-      (json['version_groups'] as List).forEach((v) {
-        versionGroups!.add(new NamedAPIResource.fromJson(v));
-      });
+      for (var v in (json['version_groups'] as List)) {
+        versionGroups!.add(NamedAPIResource.fromJson(v));
+      }
     }
     name = json['name'];
     id = json['id'];
     region = json['region'];
     if (json['descriptions'] != null) {
       descriptions = <PokedexDescription>[];
-      (json['descriptions'] as List).forEach((v) {
-        descriptions!.add(new PokedexDescription.fromJson(v));
-      });
+      for (var v in (json['descriptions'] as List)) {
+        descriptions!.add(PokedexDescription.fromJson(v));
+      }
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['is_main_series'] = this.isMainSeries;
-    if (this.pokemonEntries != null) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['is_main_series'] = isMainSeries;
+    if (pokemonEntries != null) {
       data['pokemon_entries'] =
-          this.pokemonEntries!.map((v) => v.toJson()).toList();
+          pokemonEntries!.map((v) => v.toJson()).toList();
     }
-    if (this.names != null) {
-      data['names'] = this.names!.map((v) => v.toJson()).toList();
+    if (names != null) {
+      data['names'] = names!.map((v) => v.toJson()).toList();
     }
-    if (this.versionGroups != null) {
+    if (versionGroups != null) {
       data['version_groups'] = [];
     }
-    data['name'] = this.name;
-    data['id'] = this.id;
-    data['region'] = this.region;
-    if (this.descriptions != null) {
-      data['descriptions'] = this.descriptions!.map((v) => v.toJson()).toList();
+    data['name'] = name;
+    data['id'] = id;
+    data['region'] = region;
+    if (descriptions != null) {
+      data['descriptions'] = descriptions!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -88,15 +88,15 @@ class PokedexPokemonEntry {
   PokedexPokemonEntry.fromJson(Map<String, dynamic> json) {
     entryNumber = json['entry_number'];
     pokemonSpecies = json['pokemon_species'] != null
-        ? new NamedAPIResource.fromJson(json['pokemon_species'])
+        ? NamedAPIResource.fromJson(json['pokemon_species'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['entry_number'] = this.entryNumber;
-    if (this.pokemonSpecies != null) {
-      data['pokemon_species'] = this.pokemonSpecies!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['entry_number'] = entryNumber;
+    if (pokemonSpecies != null) {
+      data['pokemon_species'] = pokemonSpecies!.toJson();
     }
     return data;
   }
@@ -116,15 +116,15 @@ class PokedexName {
   PokedexName.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     language = json['language'] != null
-        ? new NamedAPIResource.fromJson(json['language'])
+        ? NamedAPIResource.fromJson(json['language'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
     return data;
   }
@@ -144,15 +144,15 @@ class PokedexDescription {
   PokedexDescription.fromJson(Map<String, dynamic> json) {
     description = json['description'];
     language = json['language'] != null
-        ? new NamedAPIResource.fromJson(json['language'])
+        ? NamedAPIResource.fromJson(json['language'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['description'] = this.description;
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['description'] = description;
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
     return data;
   }

@@ -3,6 +3,7 @@ import 'package:pokedexer_flutter/Views/poke_page/utils/about/utils/pokedex_ente
 
 import 'package:pokedexer_flutter/Views/poke_page/utils/about/utils/species_portion.dart';
 import 'package:pokedexer_flutter/models/extensions.dart';
+// ignore: unused_import
 import 'package:pokedexer_flutter/models/pokemon/ability.dart';
 import 'package:pokedexer_flutter/models/pokemon/pokemon.dart';
 

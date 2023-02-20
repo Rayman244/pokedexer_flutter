@@ -1,27 +1,22 @@
 import 'package:pokedexer_flutter/models/utils/common.dart';
 
-class Language {
+class ItemPocket {
   int? id;
   String? name;
-  bool? official;
-  String? iso639;
-  String? iso3166;
+  List<NamedAPIResource>? categories;
   List<Names>? names;
 
-  Language(
-      {this.id,
-      this.name,
-      this.official,
-      this.iso639,
-      this.iso3166,
-      this.names});
+  ItemPocket({this.id, this.name, this.categories, this.names});
 
-  Language.fromJson(Map<String, dynamic> json) {
+  ItemPocket.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    official = json['official'];
-    iso639 = json['iso639'];
-    iso3166 = json['iso3166'];
+    if (json['categories'] != null) {
+      categories = <NamedAPIResource>[];
+      json['categories'].forEach((v) {
+        categories!.add(NamedAPIResource.fromJson(v));
+      });
+    }
     if (json['names'] != null) {
       names = <Names>[];
       json['names'].forEach((v) {
@@ -34,13 +29,18 @@ class Language {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
-    data['official'] = official;
-    data['iso639'] = iso639;
-    data['iso3166'] = iso3166;
+    if (categories != null) {
+      data['categories'] = categories!.map((v) => v.toJson()).toList();
+    }
     if (names != null) {
       data['names'] = names!.map((v) => v.toJson()).toList();
     }
     return data;
+  }
+
+  @override
+  String toString() {
+    return 'ItemPocket{id: $id, name: $name, categories: $categories, names: $names}';
   }
 }
 
@@ -64,5 +64,10 @@ class Names {
       data['language'] = language!.toJson();
     }
     return data;
+  }
+
+  @override
+  String toString() {
+    return 'Names{name: $name, language: $language}';
   }
 }

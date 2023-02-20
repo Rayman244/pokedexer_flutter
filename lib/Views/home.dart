@@ -3,7 +3,7 @@ import 'package:pokedexer_flutter/Views/poke_page/poke_page.dart';
 import 'package:pokedexer_flutter/Views/utils/bordered_text.dart';
 import 'package:pokedexer_flutter/constants.dart';
 import 'package:pokedexer_flutter/controllers/types.dart';
-import 'package:pokedexer_flutter/models/Extensions.dart';
+import 'package:pokedexer_flutter/models/extensions.dart';
 import 'package:pokedexer_flutter/models/poke_lists.dart';
 import 'package:pokedexer_flutter/models/pokemon/pokemon.dart';
 import '../models/all_pokemon.dart' as poke_info;

@@ -28,49 +28,49 @@ class Stat {
     gameIndex = json['game_index'];
     isBattleOnly = json['is_battle_only'];
     affectingMoves = json['affecting_moves'] != null
-        ? new AffectingMoves.fromJson(json['affecting_moves'])
+        ? AffectingMoves.fromJson(json['affecting_moves'])
         : null;
     affectingNatures = json['affecting_natures'] != null
-        ? new AffectingNatures.fromJson(json['affecting_natures'])
+        ? AffectingNatures.fromJson(json['affecting_natures'])
         : null;
     if (json['characteristics'] != null) {
       characteristics = <Characteristics>[];
       json['characteristics'].forEach((v) {
-        characteristics!.add(new Characteristics.fromJson(v));
+        characteristics!.add(Characteristics.fromJson(v));
       });
     }
     moveDamageClass = json['move_damage_class'] != null
-        ? new NamedAPIResource.fromJson(json['move_damage_class'])
+        ? NamedAPIResource.fromJson(json['move_damage_class'])
         : null;
     if (json['names'] != null) {
       names = <Names>[];
       json['names'].forEach((v) {
-        names!.add(new Names.fromJson(v));
+        names!.add(Names.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['game_index'] = this.gameIndex;
-    data['is_battle_only'] = this.isBattleOnly;
-    if (this.affectingMoves != null) {
-      data['affecting_moves'] = this.affectingMoves!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['game_index'] = gameIndex;
+    data['is_battle_only'] = isBattleOnly;
+    if (affectingMoves != null) {
+      data['affecting_moves'] = affectingMoves!.toJson();
     }
-    if (this.affectingNatures != null) {
-      data['affecting_natures'] = this.affectingNatures!.toJson();
+    if (affectingNatures != null) {
+      data['affecting_natures'] = affectingNatures!.toJson();
     }
-    if (this.characteristics != null) {
+    if (characteristics != null) {
       data['characteristics'] =
-          this.characteristics!.map((v) => v.toJson()).toList();
+          characteristics!.map((v) => v.toJson()).toList();
     }
-    if (this.moveDamageClass != null) {
-      data['move_damage_class'] = this.moveDamageClass!.toJson();
+    if (moveDamageClass != null) {
+      data['move_damage_class'] = moveDamageClass!.toJson();
     }
-    if (this.names != null) {
-      data['names'] = this.names!.map((v) => v.toJson()).toList();
+    if (names != null) {
+      data['names'] = names!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -92,25 +92,25 @@ class AffectingMoves {
       increase = <NamedAPIResource>[];
       json['increase'].forEach((v) {
         v = v['move'];
-        increase!.add(new NamedAPIResource.fromJson(v));
+        increase!.add(NamedAPIResource.fromJson(v));
       });
     }
     if (json['decrease'] != null) {
       decrease = <NamedAPIResource>[];
       json['decrease'].forEach((v) {
         v = v['move'];
-        decrease!.add(new NamedAPIResource.fromJson(v));
+        decrease!.add(NamedAPIResource.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.increase != null) {
-      data['increase'] = this.increase!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (increase != null) {
+      data['increase'] = increase!.map((v) => v.toJson()).toList();
     }
-    if (this.decrease != null) {
-      data['decrease'] = this.decrease!.map((v) => v.toJson()).toList();
+    if (decrease != null) {
+      data['decrease'] = decrease!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -130,15 +130,15 @@ class Increase {
   Increase.fromJson(Map<String, dynamic> json) {
     change = json['change'];
     move = json['move'] != null
-        ? new NamedAPIResource.fromJson(json['move'])
+        ? NamedAPIResource.fromJson(json['move'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['change'] = this.change;
-    if (this.move != null) {
-      data['move'] = this.move!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['change'] = change;
+    if (move != null) {
+      data['move'] = move!.toJson();
     }
     return data;
   }
@@ -158,15 +158,15 @@ class Decrease {
   Decrease.fromJson(Map<String, dynamic> json) {
     change = json['change'];
     move = json['move'] != null
-        ? new NamedAPIResource.fromJson(json['move'])
+        ? NamedAPIResource.fromJson(json['move'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['change'] = this.change;
-    if (this.move != null) {
-      data['move'] = this.move!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['change'] = change;
+    if (move != null) {
+      data['move'] = move!.toJson();
     }
     return data;
   }
@@ -187,24 +187,24 @@ class AffectingNatures {
     if (json['increase'] != null) {
       increase = <Increase>[];
       json['increase'].forEach((v) {
-        increase!.add(new Increase.fromJson(v));
+        increase!.add(Increase.fromJson(v));
       });
     }
     if (json['decrease'] != null) {
       decrease = <Decrease>[];
       json['decrease'].forEach((v) {
-        decrease!.add(new Decrease.fromJson(v));
+        decrease!.add(Decrease.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.increase != null) {
-      data['increase'] = this.increase!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (increase != null) {
+      data['increase'] = increase!.map((v) => v.toJson()).toList();
     }
-    if (this.decrease != null) {
-      data['decrease'] = this.decrease!.map((v) => v.toJson()).toList();
+    if (decrease != null) {
+      data['decrease'] = decrease!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -225,8 +225,8 @@ class Characteristics {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['url'] = this.url;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['url'] = url;
     return data;
   }
 
@@ -245,15 +245,15 @@ class Names {
   Names.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     language = json['language'] != null
-        ? new NamedAPIResource.fromJson(json['language'])
+        ? NamedAPIResource.fromJson(json['language'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
     return data;
   }

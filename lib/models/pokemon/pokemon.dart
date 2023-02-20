@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:pokedexer_flutter/models/pokemon/egg-group.dart';
-import 'package:pokedexer_flutter/models/pokemon/pokemon-specie.dart';
+import 'package:pokedexer_flutter/models/pokemon/egg_group.dart';
+import 'package:pokedexer_flutter/models/pokemon/pokemon_specie.dart';
 import 'package:pokedexer_flutter/models/utils/common.dart';
 import 'package:http/http.dart' as http;
 

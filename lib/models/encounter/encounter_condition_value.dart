@@ -1,34 +1,34 @@
 import 'package:pokedexer_flutter/models/utils/common.dart';
 
-class Version {
-  List<VersionName>? names;
-  NamedAPIResource? versionGroup;
+class EncounterConditionValue {
+  NamedAPIResource? condition;
+  List<EncounterConditionValueName>? names;
   String? name;
   int? id;
 
-  Version({this.names, this.versionGroup, this.name, this.id});
+  EncounterConditionValue({this.condition, this.names, this.name, this.id});
 
-  Version.fromJson(Map<String, dynamic> json) {
+  EncounterConditionValue.fromJson(Map<String, dynamic> json) {
+    condition = json['condition'] != null
+        ? NamedAPIResource.fromJson(json['condition'])
+        : null;
     if (json['names'] != null) {
-      names = <VersionName>[];
+      names = <EncounterConditionValueName>[];
       for (var v in (json['names'] as List)) {
-        names!.add(VersionName.fromJson(v));
+        names!.add(EncounterConditionValueName.fromJson(v));
       }
     }
-    versionGroup = json['version_group'] != null
-        ? NamedAPIResource.fromJson(json['version_group'])
-        : null;
     name = json['name'];
     id = json['id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    if (condition != null) {
+      data['condition'] = condition!.toJson();
+    }
     if (names != null) {
       data['names'] = names!.map((v) => v.toJson()).toList();
-    }
-    if (versionGroup != null) {
-      data['version_group'] = versionGroup!.toJson();
     }
     data['name'] = name;
     data['id'] = id;
@@ -37,17 +37,17 @@ class Version {
 
   @override
   String toString() {
-    return 'Version{names: $names, versionGroup: $versionGroup, name: $name, id: $id}';
+    return 'EncounterConditionValue{condition: $condition, names: $names, name: $name, id: $id}';
   }
 }
 
-class VersionName {
+class EncounterConditionValueName {
   String? name;
   NamedAPIResource? language;
 
-  VersionName({this.name, this.language});
+  EncounterConditionValueName({this.name, this.language});
 
-  VersionName.fromJson(Map<String, dynamic> json) {
+  EncounterConditionValueName.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     language = json['language'] != null
         ? NamedAPIResource.fromJson(json['language'])
@@ -65,6 +65,6 @@ class VersionName {
 
   @override
   String toString() {
-    return 'VersionName{name: $name, language: $language}';
+    return 'EncounterConditionValueName{name: $name, language: $language}';
   }
 }

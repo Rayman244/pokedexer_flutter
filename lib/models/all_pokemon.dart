@@ -65,7 +65,6 @@ Future<Map<String, dynamic>> getIndividualData(int pokeId) async {
   var request = await http.get(uri);
   var response = json.decode(request.body);
 
-  print(Pokemon.fromJson(response));
 
   return response;
 }
@@ -197,9 +196,9 @@ getEvolutions(String url) async {
 
   String evo2Name = evo["chain"]["evolves_to"][0]["species"]["name"];
   // print(evo["chain"]["evolves_to"]);
-  for (var evolution in evo["chain"]["evolves_to"]) {
-    print(evolution);
-  }
+  // for (var evolution in evo["chain"]["evolves_to"]) {
+  //   print(evolution);
+  // }
 
   var evo2 = await createEvolutionInfo(evo2Name);
   evoList.add(evo1);

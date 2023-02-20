@@ -87,43 +87,43 @@ class Item {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['cost'] = this.cost;
-    data['fling_power'] = this.flingPower;
-    if (this.flingEffect != null) {
-      data['fling_effect'] = this.flingEffect!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['cost'] = cost;
+    data['fling_power'] = flingPower;
+    if (flingEffect != null) {
+      data['fling_effect'] = flingEffect!.toJson();
     }
-    if (this.attributes != null) {
-      data['attributes'] = this.attributes!.map((v) => v.toJson()).toList();
+    if (attributes != null) {
+      data['attributes'] = attributes!.map((v) => v.toJson()).toList();
     }
-    if (this.category != null) {
-      data['category'] = this.category!.toJson();
+    if (category != null) {
+      data['category'] = category!.toJson();
     }
-    if (this.effectEntries != null) {
+    if (effectEntries != null) {
       data['effect_entries'] =
-          this.effectEntries!.map((v) => v.toJson()).toList();
+          effectEntries!.map((v) => v.toJson()).toList();
     }
-    if (this.flavorTextEntries != null) {
+    if (flavorTextEntries != null) {
       data['flavor_text_entries'] =
-          this.flavorTextEntries!.map((v) => v.toJson()).toList();
+          flavorTextEntries!.map((v) => v.toJson()).toList();
     }
-    if (this.gameIndices != null) {
-      data['game_indices'] = this.gameIndices!.map((v) => v.toJson()).toList();
+    if (gameIndices != null) {
+      data['game_indices'] = gameIndices!.map((v) => v.toJson()).toList();
     }
-    if (this.names != null) {
-      data['names'] = this.names!.map((v) => v.toJson()).toList();
+    if (names != null) {
+      data['names'] = names!.map((v) => v.toJson()).toList();
     }
-    if (this.sprites != null) {
-      data['sprites'] = this.sprites!.toJson();
+    if (sprites != null) {
+      data['sprites'] = sprites!.toJson();
     }
-    if (this.heldByPokemon != null) {
+    if (heldByPokemon != null) {
       data['held_by_pokemon'] =
-          this.heldByPokemon!.map((v) => v.toJson()).toList();
+          heldByPokemon!.map((v) => v.toJson()).toList();
     }
-    if (this.babyTriggerFor != null) {
-      data['baby_trigger_for'] = this.babyTriggerFor!.toJson();
+    if (babyTriggerFor != null) {
+      data['baby_trigger_for'] = babyTriggerFor!.toJson();
     }
     return data;
   }
@@ -150,11 +150,11 @@ class EffectEntries {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['effect'] = this.effect;
-    data['short_effect'] = this.shortEffect;
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['effect'] = effect;
+    data['short_effect'] = shortEffect;
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
     return data;
   }
@@ -183,13 +183,13 @@ class FlavorTextEntries {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['text'] = this.text;
-    if (this.versionGroup != null) {
-      data['version_group'] = this.versionGroup!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['text'] = text;
+    if (versionGroup != null) {
+      data['version_group'] = versionGroup!.toJson();
     }
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
     return data;
   }
@@ -214,10 +214,10 @@ class GameIndices {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['game_index'] = this.gameIndex;
-    if (this.generation != null) {
-      data['generation'] = this.generation!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['game_index'] = gameIndex;
+    if (generation != null) {
+      data['generation'] = generation!.toJson();
     }
     return data;
   }
@@ -242,10 +242,10 @@ class Names {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['name'] = this.name;
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
     return data;
   }
@@ -266,8 +266,8 @@ class Sprites {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['default'] = this.sprite;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['default'] = sprite;
     return data;
   }
 
@@ -296,13 +296,13 @@ class HeldByPokemon {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    if (this.pokemon != null) {
-      data['pokemon'] = this.pokemon!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (pokemon != null) {
+      data['pokemon'] = pokemon!.toJson();
     }
-    if (this.versionDetails != null) {
+    if (versionDetails != null) {
       data['version_details'] =
-          this.versionDetails!.map((v) => v.toJson()).toList();
+          versionDetails!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -327,10 +327,10 @@ class VersionDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['rarity'] = this.rarity;
-    if (this.version != null) {
-      data['version'] = this.version!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['rarity'] = rarity;
+    if (version != null) {
+      data['version'] = version!.toJson();
     }
     return data;
   }
@@ -351,8 +351,8 @@ class BabyTriggerFor {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['url'] = this.url;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['url'] = url;
     return data;
   }
 

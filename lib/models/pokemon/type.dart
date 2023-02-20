@@ -61,29 +61,29 @@ class Type {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    if (this.damageRelations != null) {
-      data['damage_relations'] = this.damageRelations!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    if (damageRelations != null) {
+      data['damage_relations'] = damageRelations!.toJson();
     }
-    if (this.gameIndices != null) {
-      data['game_indices'] = this.gameIndices!.map((v) => v.toJson()).toList();
+    if (gameIndices != null) {
+      data['game_indices'] = gameIndices!.map((v) => v.toJson()).toList();
     }
-    if (this.generation != null) {
-      data['generation'] = this.generation!.toJson();
+    if (generation != null) {
+      data['generation'] = generation!.toJson();
     }
-    if (this.moveDamageClass != null) {
-      data['move_damage_class'] = this.moveDamageClass!.toJson();
+    if (moveDamageClass != null) {
+      data['move_damage_class'] = moveDamageClass!.toJson();
     }
-    if (this.names != null) {
-      data['names'] = this.names!.map((v) => v.toJson()).toList();
+    if (names != null) {
+      data['names'] = names!.map((v) => v.toJson()).toList();
     }
-    if (this.pokemon != null) {
-      data['pokemon'] = this.pokemon!.map((v) => v.toJson()).toList();
+    if (pokemon != null) {
+      data['pokemon'] = pokemon!.map((v) => v.toJson()).toList();
     }
-    if (this.moves != null) {
-      data['moves'] = this.moves!.map((v) => v.toJson()).toList();
+    if (moves != null) {
+      data['moves'] = moves!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -145,29 +145,29 @@ class DamageRelations {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    if (this.noDamageTo != null) {
-      data['no_damage_to'] = this.noDamageTo!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (noDamageTo != null) {
+      data['no_damage_to'] = noDamageTo!.map((v) => v.toJson()).toList();
     }
-    if (this.halfDamageTo != null) {
+    if (halfDamageTo != null) {
       data['half_damage_to'] =
-          this.halfDamageTo!.map((v) => v.toJson()).toList();
+          halfDamageTo!.map((v) => v.toJson()).toList();
     }
-    if (this.doubleDamageTo != null) {
+    if (doubleDamageTo != null) {
       data['double_damage_to'] =
-          this.doubleDamageTo!.map((v) => v.toJson()).toList();
+          doubleDamageTo!.map((v) => v.toJson()).toList();
     }
-    if (this.noDamageFrom != null) {
+    if (noDamageFrom != null) {
       data['no_damage_from'] =
-          this.noDamageFrom!.map((v) => v.toJson()).toList();
+          noDamageFrom!.map((v) => v.toJson()).toList();
     }
-    if (this.halfDamageFrom != null) {
+    if (halfDamageFrom != null) {
       data['half_damage_from'] =
-          this.halfDamageFrom!.map((v) => v.toJson()).toList();
+          halfDamageFrom!.map((v) => v.toJson()).toList();
     }
-    if (this.doubleDamageFrom != null) {
+    if (doubleDamageFrom != null) {
       data['double_damage_from'] =
-          this.doubleDamageFrom!.map((v) => v.toJson()).toList();
+          doubleDamageFrom!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -187,10 +187,10 @@ class GameIndices {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['game_index'] = this.gameIndex;
-    if (this.generation != null) {
-      data['generation'] = this.generation!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['game_index'] = gameIndex;
+    if (generation != null) {
+      data['generation'] = generation!.toJson();
     }
     return data;
   }
@@ -210,10 +210,10 @@ class Names {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['name'] = this.name;
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
     return data;
   }
@@ -233,10 +233,10 @@ class TypePokemon {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['slot'] = this.slot;
-    if (this.pokemon != null) {
-      data['pokemon'] = this.pokemon!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['slot'] = slot;
+    if (pokemon != null) {
+      data['pokemon'] = pokemon!.toJson();
     }
     return data;
   }

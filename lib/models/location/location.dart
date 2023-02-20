@@ -19,22 +19,22 @@ class Location {
   Location.fromJson(Map<String, dynamic> json) {
     if (json['game_indices'] != null) {
       gameIndices = <LocationGameIndex>[];
-      (json['game_indices'] as List).forEach((v) {
+      for (var v in (json['game_indices'] as List)) {
         gameIndices!.add(LocationGameIndex.fromJson(v));
-      });
+      }
     }
     if (json['names'] != null) {
       names = <LocationName>[];
-      (json['names'] as List).forEach((v) {
+      for (var v in (json['names'] as List)) {
         names!.add(LocationName.fromJson(v));
-      });
+      }
     }
     name = json['name'];
     if (json['areas'] != null) {
       areas = <NamedAPIResource>[];
-      (json['areas'] as List).forEach((v) {
+      for (var v in (json['areas'] as List)) {
         areas!.add(NamedAPIResource.fromJson(v));
-      });
+      }
     }
     id = json['id'];
     region = json['region'] != null
@@ -43,20 +43,20 @@ class Location {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    if (this.gameIndices != null) {
-      data['game_indices'] = this.gameIndices!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (gameIndices != null) {
+      data['game_indices'] = gameIndices!.map((v) => v.toJson()).toList();
     }
-    if (this.names != null) {
-      data['names'] = this.names!.map((v) => v.toJson()).toList();
+    if (names != null) {
+      data['names'] = names!.map((v) => v.toJson()).toList();
     }
-    data['name'] = this.name;
-    if (this.areas != null) {
-      data['areas'] = this.areas!.map((v) => v.toJson()).toList();
+    data['name'] = name;
+    if (areas != null) {
+      data['areas'] = areas!.map((v) => v.toJson()).toList();
     }
-    data['id'] = this.id;
-    if (this.region != null) {
-      data['region'] = this.region!.toJson();
+    data['id'] = id;
+    if (region != null) {
+      data['region'] = region!.toJson();
     }
     return data;
   }
@@ -81,11 +81,11 @@ class LocationGameIndex {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    if (this.generation != null) {
-      data['generation'] = this.generation!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (generation != null) {
+      data['generation'] = generation!.toJson();
     }
-    data['game_index'] = this.gameIndex;
+    data['game_index'] = gameIndex;
     return data;
   }
 
@@ -109,10 +109,10 @@ class LocationName {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['name'] = this.name;
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
     return data;
   }
