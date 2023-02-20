@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pokedexer_flutter/Views/poke_page.dart';
+import 'package:pokedexer_flutter/Views/poke_page/poke_page.dart';
 import 'package:pokedexer_flutter/Views/utils/bordered_text.dart';
 import 'package:pokedexer_flutter/constants.dart';
 import 'package:pokedexer_flutter/controllers/types.dart';
+import 'package:pokedexer_flutter/models/Extensions.dart';
 import 'package:pokedexer_flutter/models/poke_lists.dart';
 import 'package:pokedexer_flutter/models/pokemon/pokemon.dart';
 import '../models/all_pokemon.dart' as poke_info;
-import '../models/extensions.dart' as my_extensions;
 
 class Home extends StatefulWidget {
   const Home({super.key, required this.title});
@@ -31,6 +31,13 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    // The equivalent of the "smallestWidth" qualifier on Android.
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+
+// Determine if we should use mobile layout or not, 600 here is
+// a common breakpoint for a typical 7-inch tablet.
+    final bool useMobileLayout = shortestSide < 600;
+    final bool landscapeModeActive = screenWidth > screenHeight;
 
     return Scaffold(
         backgroundColor: Colors.grey.shade400,
@@ -53,6 +60,25 @@ class _HomeState extends State<Home> {
                   color: PokeColors.yellow,
                 )),
           ],
+        ),
+        bottomNavigationBar: Container(
+          color: PokeColors.red,
+          child: Padding(
+            padding: const EdgeInsets.only(
+                right: 15.0, bottom: 15, left: 15, top: 4),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  showPrevButton
+                      ? ElevatedButton(
+                          onPressed: () => updatePokeList(prevLink),
+                          child: const Text("Prev"))
+                      : const SizedBox.shrink(),
+                  ElevatedButton(
+                      onPressed: () => updatePokeList(nextLink),
+                      child: const Text("Next")),
+                ]),
+          ),
         ),
         body: Stack(
           children: [
@@ -81,12 +107,17 @@ class _HomeState extends State<Home> {
                     return Stack(children: [
                       Align(
                           alignment: const Alignment(0, 0),
-                          child: Padding(
-                              padding: const EdgeInsets.only(bottom: 40.0),
+                          child: SafeArea(
+                            child: SizedBox(
+                              height: screenHeight * .95,
                               child: GridView.builder(
                                   gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: useMobileLayout
+                                        ? 2
+                                        : landscapeModeActive
+                                            ? 5
+                                            : 4,
                                   ),
                                   itemCount: 20,
                                   itemBuilder:
@@ -143,35 +174,75 @@ class _HomeState extends State<Home> {
                                                             secondaryColor:
                                                                 secondryColor,
                                                           ))),
-                                          child: Column(
+                                          child: Stack(
                                             children: [
-                                              Image(
-                                                height: 135,
-                                                image: NetworkImage(pokemon
-                                                    .origionalArtworkFrontDefault!),
-                                              ),
-                                              SizedBox(
+                                              Align(
+                                                alignment: Alignment.center,
                                                 child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
                                                   children: [
-                                                    Column(
-                                                      children: [
-                                                        Text(
-                                                          pokemon.name!,
-                                                          style: const TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                      ],
+                                                    Image(
+                                                      width: (screenWidth /
+                                                              (useMobileLayout
+                                                                  ? 2
+                                                                  : landscapeModeActive
+                                                                      ? 5
+                                                                      : 3.9)) *
+                                                          .65,
+                                                      image: NetworkImage(pokemon
+                                                          .sprites!
+                                                          .origionalArtworkFrontDefault!),
                                                     ),
-                                                    PokeTypes(
-                                                        typeList:
-                                                            pokemon.types!)
-                                                    // Center(
-                                                    //   child:
-                                                    //       getTypes(pokeTypes),
-                                                    // ),
+                                                    SizedBox(
+                                                      child: Column(
+                                                        children: [
+                                                          Column(
+                                                            children: [
+                                                              Text(
+                                                                capitalize(
+                                                                    pokemon
+                                                                        .name!),
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        useMobileLayout
+                                                                            ? 18
+                                                                            : 24,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          PokeTypes(
+                                                              typeList: pokemon
+                                                                  .types!)
+                                                          // Center(
+                                                          //   child:
+                                                          //       getTypes(pokeTypes),
+                                                          // ),
+                                                        ],
+                                                      ),
+                                                    ),
                                                   ],
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment: Alignment.topLeft,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0, top: 8),
+                                                  child: Text(
+                                                    "# ${pokemon.id}",
+                                                    style: TextStyle(
+                                                        fontSize:
+                                                            useMobileLayout
+                                                                ? 15
+                                                                : 20,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -179,37 +250,14 @@ class _HomeState extends State<Home> {
                                         ),
                                       ),
                                     );
-                                  }))),
+                                  }),
+                            ),
+                          )),
                     ]);
                   } else {
                     return const Center(child: CircularProgressIndicator());
                   }
                 }),
-            Align(
-              alignment: const Alignment(0, 1),
-              child: Container(
-                height: screenHeight * .08,
-                color: PokeColors.red,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      left: screenWidth * .05,
-                      right: screenWidth * .05,
-                      bottom: screenWidth * .05),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        showPrevButton
-                            ? ElevatedButton(
-                                onPressed: () => updatePokeList(prevLink),
-                                child: const Text("Prev"))
-                            : const SizedBox.shrink(),
-                        ElevatedButton(
-                            onPressed: () => updatePokeList(nextLink),
-                            child: const Text("Next")),
-                      ]),
-                ),
-              ),
-            )
           ],
         ));
   }

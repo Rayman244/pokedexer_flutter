@@ -10,6 +10,15 @@ class PokeTypes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    // The equivalent of the "smallestWidth" qualifier on Android.
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+
+// Determine if we should use mobile layout or not, 600 here is
+// a common breakpoint for a typical 7-inch tablet.
+    final bool useMobileLayout = shortestSide < 600;
+    final bool landscapeModeActive = screenWidth > screenHeight;
     List<Widget> pokeTypes = [];
     for (var type in typeList) {
       var typeName = my_extensions.capitalize(type.type!.name!);
@@ -26,9 +35,7 @@ class PokeTypes extends StatelessWidget {
             padding: const EdgeInsets.all(3.0),
             child: Text(
               typeName,
-              style: TextStyle(
-                  // backgroundColor: typeColor,
-                  ),
+              style: TextStyle(fontSize: useMobileLayout ? 15 : 18),
             ),
           ),
         ),

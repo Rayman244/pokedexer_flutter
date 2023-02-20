@@ -100,11 +100,39 @@ class PokemonSpecie {
         names!.add(Names.fromJson(v));
       });
     }
+    // filterslanguage to only be english and sorts the versions to each flavor entery  
     if (json['flavor_text_entries'] != null) {
+      List<Map<String, dynamic>> enEnteries = [];
+      List editedEnteries = [];
+      List<Map<String, dynamic>> versionGroups = [];
+      for (var entry in json['flavor_text_entries']) {
+        if (entry["language"]["name"] == "en") {
+          enEnteries.add(entry);
+        }
+      }
+      for (var entry in enEnteries) {
+        var editedEntry =
+            entry["flavor_text"].replaceAll("\n", " ").replaceAll("\f", " ");
+
+        editedEnteries.add(editedEntry);
+      }
+      List filteredEnteries = editedEnteries.toSet().toList();
+      for (var fEntry in filteredEnteries) {
+        var group = [];
+        for (var entry in enEnteries) {
+          var editedEntry =
+              entry["flavor_text"].replaceAll("\n", " ").replaceAll("\f", " ");
+          if (editedEntry == fEntry) {
+            group.add(entry["version"]["name"]);
+          }
+        }
+        versionGroups.add({"versions": group, "flavor_text": fEntry});
+      }
+
       flavorTextEntries = <FlavorTextEntries>[];
-      json['flavor_text_entries'].forEach((v) {
+      for (var v in versionGroups) {
         flavorTextEntries!.add(FlavorTextEntries.fromJson(v));
-      });
+      }
     }
     if (json['form_descriptions'] != null) {
       formDescriptions = <FormDescriptions>[];
@@ -127,59 +155,58 @@ class PokemonSpecie {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['order'] = this.order;
-    data['gender_rate'] = this.genderRate;
-    data['capture_rate'] = this.captureRate;
-    data['base_happiness'] = this.baseHappiness;
-    data['is_baby'] = this.isBaby;
-    data['hatch_counter'] = this.hatchCounter;
-    data['has_gender_differences'] = this.hasGenderDifferences;
-    data['forms_switchable'] = this.formsSwitchable;
-    if (this.growthRate != null) {
-      data['growth_rate'] = this.growthRate!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['order'] = order;
+    data['gender_rate'] = genderRate;
+    data['capture_rate'] = captureRate;
+    data['base_happiness'] = baseHappiness;
+    data['is_baby'] = isBaby;
+    data['hatch_counter'] = hatchCounter;
+    data['has_gender_differences'] = hasGenderDifferences;
+    data['forms_switchable'] = formsSwitchable;
+    if (growthRate != null) {
+      data['growth_rate'] = growthRate!.toJson();
     }
-    if (this.pokedexNumbers != null) {
-      data['pokedex_numbers'] =
-          this.pokedexNumbers!.map((v) => v.toJson()).toList();
+    if (pokedexNumbers != null) {
+      data['pokedex_numbers'] = pokedexNumbers!.map((v) => v.toJson()).toList();
     }
-    if (this.eggGroups != null) {
-      data['egg_groups'] = this.eggGroups!.map((v) => v.toJson()).toList();
+    if (eggGroups != null) {
+      data['egg_groups'] = eggGroups!.map((v) => v.toJson()).toList();
     }
-    if (this.color != null) {
-      data['color'] = this.color!.toJson();
+    if (color != null) {
+      data['color'] = color!.toJson();
     }
-    if (this.shape != null) {
-      data['shape'] = this.shape!.toJson();
+    if (shape != null) {
+      data['shape'] = shape!.toJson();
     }
-    if (this.evolvesFromSpecies != null) {
-      data['evolves_from_species'] = this.evolvesFromSpecies!.toJson();
+    if (evolvesFromSpecies != null) {
+      data['evolves_from_species'] = evolvesFromSpecies!.toJson();
     }
-    if (this.evolutionChain != null) {
-      data['evolution_chain'] = this.evolutionChain!.toJson();
+    if (evolutionChain != null) {
+      data['evolution_chain'] = evolutionChain!.toJson();
     }
-    data['habitat'] = this.habitat;
-    if (this.generation != null) {
-      data['generation'] = this.generation!.toJson();
+    data['habitat'] = habitat;
+    if (generation != null) {
+      data['generation'] = generation!.toJson();
     }
-    if (this.names != null) {
-      data['names'] = this.names!.map((v) => v.toJson()).toList();
+    if (names != null) {
+      data['names'] = names!.map((v) => v.toJson()).toList();
     }
-    if (this.flavorTextEntries != null) {
+    if (flavorTextEntries != null) {
       data['flavor_text_entries'] =
-          this.flavorTextEntries!.map((v) => v.toJson()).toList();
+          flavorTextEntries!.map((v) => v.toJson()).toList();
     }
-    if (this.formDescriptions != null) {
+    if (formDescriptions != null) {
       data['form_descriptions'] =
-          this.formDescriptions!.map((v) => v.toJson()).toList();
+          formDescriptions!.map((v) => v.toJson()).toList();
     }
-    if (this.genera != null) {
-      data['genera'] = this.genera!.map((v) => v.toJson()).toList();
+    if (genera != null) {
+      data['genera'] = genera!.map((v) => v.toJson()).toList();
     }
-    if (this.varieties != null) {
-      data['varieties'] = this.varieties!.map((v) => v.toJson()).toList();
+    if (varieties != null) {
+      data['varieties'] = varieties!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -204,10 +231,10 @@ class PokedexNumbers {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['entry_number'] = this.entryNumber;
-    if (this.pokedex != null) {
-      data['pokedex'] = this.pokedex!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['entry_number'] = entryNumber;
+    if (pokedex != null) {
+      data['pokedex'] = pokedex!.toJson();
     }
     return data;
   }
@@ -232,10 +259,10 @@ class Names {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['name'] = this.name;
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
     return data;
   }
@@ -248,36 +275,44 @@ class Names {
 
 class FlavorTextEntries {
   String? flavorText;
-  NamedAPIResource? language;
-  NamedAPIResource? version;
+  List<dynamic>? versions;
+  // NamedAPIResource? language;
+  // NamedAPIResource? version;
 
-  FlavorTextEntries({this.flavorText, this.language, this.version});
+  FlavorTextEntries({this.flavorText, this.versions
+      // this.language,
+      //  this.version
+      });
 
   FlavorTextEntries.fromJson(Map<String, dynamic> json) {
     flavorText = json['flavor_text'];
-    language = json['language'] != null
-        ? NamedAPIResource.fromJson(json['language'])
-        : null;
-    version = json['version'] != null
-        ? NamedAPIResource.fromJson(json['version'])
-        : null;
+    versions = json['versions'];
+    // language = json['language'] != null
+    //     ? NamedAPIResource.fromJson(json['language'])
+    //     : null;
+    // version = json['version'] != null
+    //     ? NamedAPIResource.fromJson(json['version'])
+    //     : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['flavor_text'] = this.flavorText;
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
-    }
-    if (this.version != null) {
-      data['version'] = this.version!.toJson();
-    }
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['flavor_text'] = flavorText;
+    // if (this.language != null) {
+    //   data['language'] = this.language!.toJson();
+    // }
+    // if (this.version != null) {
+    //   data['version'] = this.version!.toJson();
+    // }
     return data;
   }
 
   @override
   String toString() {
-    return 'FlavorTextEntries{flavorText: $flavorText, language: $language, version: $version}';
+    return 'FlavorTextEntries{flavorText: $flavorText,';
+    //  language: $language,
+    //  version: $version}
+    // ';
   }
 }
 
@@ -295,10 +330,10 @@ class FormDescriptions {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['description'] = this.description;
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['description'] = description;
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
     return data;
   }
@@ -323,10 +358,10 @@ class Genera {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['genus'] = this.genus;
-    if (this.language != null) {
-      data['language'] = this.language!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['genus'] = genus;
+    if (language != null) {
+      data['language'] = language!.toJson();
     }
     return data;
   }
@@ -351,10 +386,10 @@ class Varieties {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['is_default'] = this.isDefault;
-    if (this.pokemon != null) {
-      data['pokemon'] = this.pokemon!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['is_default'] = isDefault;
+    if (pokemon != null) {
+      data['pokemon'] = pokemon!.toJson();
     }
     return data;
   }
