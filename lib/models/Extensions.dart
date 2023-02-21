@@ -11,14 +11,19 @@ String remSpecCharacters(String ogString) {
   return returnedString;
 }
 
-String eachCap(String str) {
+String eachCap(String str, {String joinType = " "}) {
   List<String> splitStr = str.split(" ");
+  splitStr = str.split("-");
   List<String> upStrs = [];
   if (splitStr.length > 1) {
     for (var string in splitStr) {
       upStrs.add(capitalize(string));
     }
-    return upStrs.join(" ");
+    if (joinType == " ") {
+      return upStrs.join(" ");
+    } else {
+      return upStrs.join(joinType);
+    }
   }
   return capitalize(str);
 }

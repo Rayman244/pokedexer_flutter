@@ -26,6 +26,7 @@ class PokedexEnteries extends StatelessWidget {
                 child: SizedBox(
                   width: 110,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: versions,
                   ),
                 ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pokedexer_flutter/Views/utils/bordered_text.dart';
 import 'package:pokedexer_flutter/constants.dart';
 import 'package:pokedexer_flutter/Views/poke_page/utils/about/about.dart';
+import 'package:pokedexer_flutter/controllers/stats/stats_portion.dart';
 import 'package:pokedexer_flutter/controllers/types.dart';
 import 'package:pokedexer_flutter/models/extensions.dart';
 import 'package:pokedexer_flutter/models/pokemon/pokemon.dart';
@@ -124,7 +125,6 @@ class _PokePageState extends State<PokePage> with TickerProviderStateMixin {
                   //       widget.pokemon.sprites!.origionalArtworkFrontDefault!),
                   // ),
                   ),
-
               SafeArea(
                 child: Align(
                   alignment: Alignment.bottomCenter,
@@ -144,8 +144,10 @@ class _PokePageState extends State<PokePage> with TickerProviderStateMixin {
                         About(
                           pokemon: widget.pokemon,
                         ),
-
-                        Container(),
+                        StatsPortion(
+                            stats: widget.pokemon.stats,
+                            baseExp: widget.pokemon.baseExperience),
+                        // Container(),
                         Container(),
                         Container(),
                         // statsPortion(pokeinfo.data["stats"], baseExp, locations),
@@ -169,7 +171,7 @@ class CarouselDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(sprites);
+    // print(sprites);
     CarouselController buttonCarouselController = CarouselController();
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -177,26 +179,25 @@ class CarouselDemo extends StatelessWidget {
         CarouselSlider(
           items: [
             Image.network(sprites!.origionalArtworkFrontDefault!),
-            sprites!.backDefault != null
-                ? Image.network(sprites!.backDefault!)
-                : const Center(child: Text("No Image")),
-            sprites!.frontDefault != null
-                ? Image.network(sprites!.frontDefault!)
-                : const Center(child: Text("No Image")),
+            // sprites!.backDefault != null
+            //     ? Image.network(sprites!.backDefault!)
+            //     : const Center(child: Text("No Image")),
+            // sprites!.frontDefault != null
+            //     ? Image.network(sprites!.frontDefault!)
+            //     : const Center(child: Text("No Image")),
 
-            sprites!.backShiny != null
-                ? Image.network(sprites!.backShiny!)
-                : const Center(child: Text("No Image")),
-            sprites!.frontShiny != null
-                ? Image.network(sprites!.frontShiny!)
-                : const Center(child: Text("No Image")),
-            sprites!.backFemale != null
-                ? Image.network(sprites!.backShiny!)
-                : const Center(child: Text("No Image")),
-            sprites!.frontFemale != null
-                ? Image.network(sprites!.backShiny!)
-                : const Center(child: Text("No Image")),
-
+            // sprites!.backShiny != null
+            //     ? Image.network(sprites!.backShiny!)
+            //     : const Center(child: Text("No Image")),
+            // sprites!.frontShiny != null
+            //     ? Image.network(sprites!.frontShiny!)
+            //     : const Center(child: Text("No Image")),
+            // sprites!.backFemale != null
+            //     ? Image.network(sprites!.backShiny!)
+            //     : const Center(child: Text("No Image")),
+            // sprites!.frontFemale != null
+            //     ? Image.network(sprites!.backShiny!)
+            //     : const Center(child: Text("No Image")),
           ],
           carouselController: buttonCarouselController,
           options: CarouselOptions(
